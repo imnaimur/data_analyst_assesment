@@ -2,28 +2,6 @@
 
 This repository contains a CTE-based PostgreSQL operational and ROI analysis of a parcel delivery network. It combines agent, hub, order, order-event, salary, and forecast data to evaluate current performance and make staffing, budget, and return-on-investment recommendations.
 
-## Data model
-
-| Table | Description |
-| --- | --- |
-| `agents` | Agent identity, hub assignment, salary type, joining date, and active status |
-| `agent_salary` | Monthly salary and delivery allowance rules by salary type |
-| `hubs` | Hub names and cluster assignments |
-| `orders` | Order creation time, final status, COD amount, and delivery charge |
-| `order_logs` | Assignment, delivery, hold, and return events for each order attempt |
-| `volume_forecast` | Expected order volume by hub and forecast week |
-
-The source files are:
-
-```text
-agents.csv
-agent_salary.csv
-hubs.csv
-orders.csv
-order_logs.csv
-volume_forecast.csv
-```
-
 ## Tableau Dashboard
 
 A Tableau dashboard was built to provide an interactive view of the operational performance, staffing performane,Other statiscitcs.
@@ -45,29 +23,46 @@ A Tableau dashboard was built to provide an interactive view of the operational 
 | 9 | Recommended staffing plan and budget allocation | `sqls/q9/` |
 | 10 | Risks, early-warning indicators, and mitigations | `sqls/q10/` |
 
-## Results
+## Operational Snapshot
 
-The `results/` directory contains Excel deliverables for 1-9:
+| Metric | Result |
+|---|---:|
+| Hubs analyzed | 6 |
+| Active agents | 62 |
+| Orders | 51,190 |
+| Average utilization | 80.57% |
+| Delivery attempts | 25,595 |
+| Delivered | 21,078 |
+| Holds | 3,042 |
+| Returned | 1,475 |
 
-```text
-q1_part1.xlsx
-q1_part2.xlsx
-q2.xlsx
-q3.xlsx
-q4.xlsx
-q5.xlsx
-q6.xlsx
-q7.xlsx
-q8.xlsx
-q9_calculations.xlsx
-```
+## Hub Performance
 
-## Analysis conventions
+| Hub | Agents | Week 2 Utilization | Agent-side Holds | Attempts per Order | Workload |
+|---|---:|---:|---:|---:|---|
+| Greenfield | 10 | 88.6% | 19.0% | 1.073 | Above target |
+| Hillcrest | 9 | 95.9% | 22.0% | 1.078 | Above target |
+| Riverside | 12 | 90.8% | 64.4% | 1.351 | Above target |
+| Westwood | 9 | 80.4% | 20.5% | 1.067 | Balanced |
+| Brookside | 11 | 71.5% | 26.3% | 1.085 | Below target |
+| Lakeview | 11 | 56.2% | 21.1% | 1.073 | Below target |
 
-- `order_logs` records order attempts and operational events; a held order can therefore generate additional attempts.
-- 2 defines and compares hub utilization across the first two analysis weeks.
-- 5 uses tenure and return ratio to identify higher-risk agent performance.
-- 6 calculates agent cost using the salary rules in `agent_salary` and divides it by delivered orders.
-- 7 converts forecast orders into expected attempts using each hub's observed attempts-per-order rate.
-- 8-Q9 distinguish between transferring surplus agents and hiring new fixed-cost agents.
-- 10 describes the monitoring signals to use during the first two weeks after implementing the staffing plan.
+## Forecasted Outcome
+
+The proposed staffing distribution was projected to change hub
+utilization as follows:
+
+| Hub | Current Agents | Proposed Agents | Current Utilization | Forecast Utilization |
+|---|---:|---:|---:|---:|
+| Greenfield | 10 | 12 | 88.6% | 83% |
+| Hillcrest | 9 | 11 | 95.9% | 83% |
+| Riverside | 12 | 13 | 90.8% | 84% |
+| Westwood | 9 | 9 | 80.4% | 82% |
+| Brookside | 11 | 11 | 71.5% | 72% |
+| Lakeview | 11 | 8 | 56.2% | 77% |
+
+| Comparison | Current | Forecast after redistribution |
+|---|---:|---:|
+| Lowest hub utilization | 56.2% | 72% |
+| Highest hub utilization | 95.9% | 84% |
+| Utilization range | 39.7 percentage points | 12 percentage points |
