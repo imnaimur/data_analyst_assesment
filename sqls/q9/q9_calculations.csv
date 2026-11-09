@@ -1,0 +1,83 @@
+Section,Line,Item,Formula / Calculation,Value,Unit,Source / Reference
+BUDGET CONSTRAINT,1,Total budget available,,70000,BDT,Given in Q9
+BUDGET CONSTRAINT,2,8-agent request salary,8 agents × 19500/month,156000,BDT,agent_salary table: 16900/26 = 650/day × 30 days
+BUDGET CONSTRAINT,3,Budget shortfall for 8 agents,156000 − 70000,86000,BDT,Lines 1 − 2
+BUDGET CONSTRAINT,4,5-agent (Q7 gap) salary,5 × 19500,97500,BDT,Q7 staffing gap = 5; agent_salary table
+BUDGET CONSTRAINT,5,Max hires at BDT 10k one-time cost,FLOOR(70000 / (10000 + 19500)),2,agents,Budget ÷ (OTC + salary)
+BUDGET CONSTRAINT,6,Remaining after 2 hires (mid OTC),70000 − 2×(10000 + 19500),11000,BDT,Line 1 − 2×(OTC + salary)
+SALARY RATES,7,Fixed agent daily rate,16900 / 26,650,BDT/day,agent_salary table: monthly_salary / 26
+SALARY RATES,8,Fixed agent monthly cost,650 × 30,19500,BDT/month,Line 7 × 30 days (hubs operate 7 days/week)
+SALARY RATES,9,Variable agent daily rate (32 del),300 + 14 × 32,748,BDT/day,agent_salary table: daily_allowance + allowance_per_delivery × d
+SALARY RATES,10,Fixed vs Variable breakeven,(650 − 300) / 14,25,deliveries/day,"650 = 300 + 14d → d = 25; above 25, Fixed is cheaper"
+MOVE 1: TRANSFERS,11,Lakeview active agents,,11,agents,agents table WHERE hub_id = H02 AND active_status = Active
+MOVE 1: TRANSFERS,12,Lakeview required agents (peak),CEIL(1606 × 1.073 / 238),8,agents,Q7: volume_forecast peak week × attempts_per_order ÷ (34 × 7)
+MOVE 1: TRANSFERS,13,Lakeview surplus agents,11 − 8,3,agents,Lines 11 − 12
+MOVE 1: TRANSFERS,14,Lakeview W2 utilisation,1730 / (11 × 40 × 7) × 100,56.2,%,Q2: W2 attempts ÷ (agents × 40 × 7)
+MOVE 1: TRANSFERS,15,Lakeview W2 cost per delivery,47588 / 1532,31.06,BDT/delivery,Q6: W2 total cost ÷ W2 deliveries
+MOVE 1: TRANSFERS,16,Agents transferred to Greenfield,,2,agents,Greenfield gap = +2 (Q7)
+MOVE 1: TRANSFERS,17,Agents transferred to Hillcrest,,1,agents,Partial fill of Hillcrest gap = +2 (Q7)
+MOVE 1: TRANSFERS,18,Del/agent/day at Lakeview (W2),,20.4,del/day,Q1: order_logs Delivered events per agent-day at H02 in W2
+MOVE 1: TRANSFERS,19,Del/agent/day at Greenfield (W2),,32.0,del/day,Q1: order_logs Delivered events per agent-day at H01 in W2
+MOVE 1: TRANSFERS,20,Del/agent/day at Hillcrest (W2),,34.6,del/day,Q1: order_logs Delivered events per agent-day at H04 in W2
+MOVE 1: TRANSFERS,21,Output BEFORE transfer (3 agents at Lakeview),3 × 20.4,61.2,del/day,Line 18 × 3
+MOVE 1: TRANSFERS,22,Output AFTER transfer (2 at Greenfield + 1 at Hillcrest),2 × 32.0 + 1 × 34.6,98.6,del/day,Lines 16×19 + 17×20
+MOVE 1: TRANSFERS,23,Net daily delivery gain,98.6 − 61.2,37.4,del/day,Lines 22 − 21
+MOVE 1: TRANSFERS,24,Net monthly delivery gain,37.4 × 30,1122,deliveries/month,Line 23 × 30 days
+MOVE 1: TRANSFERS,25,Revenue from transfers,1122 × 65,72930,BDT/month,Line 24 × avg delivery charge (orders table)
+MOVE 1: TRANSFERS,26,Incremental cost of transfers,,0,BDT,Agents already on payroll
+MOVE 1: TRANSFERS,27,Net return from transfers,72930 − 0,72930,BDT/month,Lines 25 − 26
+MOVE 1: TRANSFERS,28,Lakeview post-transfer agents,11 − 3,8,agents,Lines 11 − 13
+MOVE 1: TRANSFERS,29,Lakeview post-transfer weekly cost,47588 − 3 × 650 × 7,33938,BDT/week,"Q6 W2 cost minus 3 Fixed agent-weeks (agent mix: 8F+3V, transferring Fixed)"
+MOVE 1: TRANSFERS,30,Lakeview post-transfer cost/delivery,33938 / 1532,22.15,BDT/delivery,Line 29 ÷ Q6 W2 deliveries (volume unchanged)
+MOVE 1: TRANSFERS,31,Lakeview cost/delivery improvement %,(31.06 − 22.15) / 31.06 × 100,29,%,Lines 15 vs 30
+MOVE 2: NEW HIRES,32,Hillcrest W2 utilisation,2416 / (9 × 40 × 7) × 100,95.9,%,Q2: W2 attempts ÷ (9 agents × 40 × 7)
+MOVE 2: NEW HIRES,33,Hillcrest gap after transfer,2 − 1,1,agents,Q7 gap (+2) minus 1 transfer from Move 1
+MOVE 2: NEW HIRES,34,Riverside gap,,1,agents,Q7: CEIL(3033/238) − 12 = 13 − 12
+MOVE 2: NEW HIRES,35,Riverside attempts-per-order,,1.351,att/order,"Q7: order_logs Assigned count ÷ orders count, hub H03"
+MOVE 2: NEW HIRES,36,Company avg attempts-per-order (excl Riverside),,1.075,att/order,"Q7: avg of H01(1.073), H02(1.073), H04(1.078), H05(1.085), H06(1.067)"
+MOVE 2: NEW HIRES,37,Riverside required if dispatch fixed,CEIL(2245 × 1.075 / 238),11,agents,Q8 scenario query: peak orders × avg att/order ÷ 238
+MOVE 2: NEW HIRES,38,Riverside gap if dispatch fixed,11 − 12,−1,agents (surplus),Line 37 − 12 active agents
+MOVE 2: NEW HIRES,39,Hillcrest new agent: del/day,34 / 1.078,31.5,del/day,Planning target (34 att/day) ÷ Hillcrest att/order (Q7)
+MOVE 2: NEW HIRES,40,Hillcrest new agent: del/month,31.5 × 30,945,deliveries,Line 39 × 30 days
+MOVE 2: NEW HIRES,41,Hillcrest new agent: revenue,945 × 65,61425,BDT/month,Line 40 × avg delivery charge
+MOVE 2: NEW HIRES,42,Riverside new agent: del/day,34 / 1.351,25.2,del/day,Planning target ÷ Riverside att/order (Q7)
+MOVE 2: NEW HIRES,43,Riverside new agent: del/month,25.2 × 30,756,deliveries,Line 42 × 30 days
+MOVE 2: NEW HIRES,44,Riverside new agent: revenue,756 × 65,49140,BDT/month,Line 43 × avg delivery charge
+MOVE 2: NEW HIRES,45,Total deliveries from 2 new hires,945 + 756,1701,deliveries/month,Lines 40 + 43
+MOVE 2: NEW HIRES,46,Total revenue from 2 new hires,61425 + 49140,110565,BDT/month,Lines 41 + 44
+MOVE 2: NEW HIRES,47,Total salary cost,2 × 19500,39000,BDT/month,2 × Line 8
+MOVE 2: NEW HIRES,48,Net return from hires,110565 − 39000,71565,BDT/month,Lines 46 − 47
+MOVE 2: NEW HIRES,49,Payback period,39000 / (110565 / 30),10.6,days,Salary ÷ daily revenue
+MOVE 3: DISPATCH FIX,50,Riverside Late Dispatch holds (W2),,312,holds/week,Q3: order_logs WHERE hub=H03 AND hold_reason=Late Dispatch in W2
+MOVE 3: DISPATCH FIX,51,Riverside total agent-side holds (W2),,563,holds/week,Q3: Late Dispatch(312) + Not Attempted(132) + Agent Time Shortage(119)
+MOVE 3: DISPATCH FIX,52,Agent cost per attempt,650 / 34,19.12,BDT/attempt,Fixed daily rate ÷ planning target (34 att/day)
+MOVE 3: DISPATCH FIX,53,Weekly waste from Late Dispatch,312 × 19.12,5965,BDT/week,Line 50 × Line 52
+MOVE 3: DISPATCH FIX,54,Monthly waste from Late Dispatch,5965 × 4.3,25650,BDT/month,Line 53 × 4.3 weeks/month
+MOVE 3: DISPATCH FIX,55,Annual waste from Late Dispatch,25650 × 12,307800,BDT/year,Line 54 × 12 months
+MOVE 3: DISPATCH FIX,56,Target reduction,50%,,,%,Operational target (assumption)
+MOVE 3: DISPATCH FIX,57,Late Dispatch after fix,312 × 0.5,156,holds/week,Line 50 × (1 − Line 56)
+MOVE 3: DISPATCH FIX,58,Freed attempts per month,156 × 4.3,671,attempts/month,Lines (50 − 57) × 4.3
+MOVE 3: DISPATCH FIX,59,Additional deliveries from freed attempts,671 / 1.075,624,deliveries/month,Line 58 ÷ company avg att/order (Line 36)
+MOVE 3: DISPATCH FIX,60,Revenue from additional deliveries,624 × 65,40560,BDT/month,Line 59 × avg delivery charge
+MOVE 3: DISPATCH FIX,61,Agent-time savings (opportunity cost),671 × 19.12,12830,BDT/month,Line 58 × Line 52
+MOVE 3: DISPATCH FIX,62,Combined monthly benefit,40560 + 12830,53390,BDT/month,Lines 60 + 61
+MOVE 3: DISPATCH FIX,63,Programme cost (one-time),budget remainder,≤21000,BDT,"70000 − salary − OTC; ranges 0–21000 (see Lines 5,6)"
+MOVE 3: DISPATCH FIX,64,Conservative benefit (30% reduction),53390 × 0.6,32034,BDT/month,Line 62 × (30%/50%) ratio
+BUDGET ALLOCATION (mid OTC scenario),65,One-time costs (2 agents),2 × 10000,20000,BDT,Assumed BDT 10000/agent (costs tab missing)
+BUDGET ALLOCATION (mid OTC scenario),66,First-month salary (2 Fixed),2 × 19500,39000,BDT,Line 47
+BUDGET ALLOCATION (mid OTC scenario),67,Riverside dispatch programme,70000 − 20000 − 39000,11000,BDT,Line 1 − Line 65 − Line 66
+BUDGET ALLOCATION (mid OTC scenario),68,Total allocated,20000 + 39000 + 11000,70000,BDT,Lines 65 + 66 + 67
+TOTAL RETURN,69,Deliveries from transfers,,1122,deliveries/month,Line 24
+TOTAL RETURN,70,Deliveries from new hires,,1701,deliveries/month,Line 45
+TOTAL RETURN,71,Deliveries from dispatch fix,,624,deliveries/month,Line 59
+TOTAL RETURN,72,Total additional deliveries,1122 + 1701 + 624,3447,deliveries/month,Lines 69 + 70 + 71
+TOTAL RETURN,73,Revenue from transfers,,72930,BDT/month,Line 25
+TOTAL RETURN,74,Revenue from new hires,,110565,BDT/month,Line 46
+TOTAL RETURN,75,Revenue from dispatch fix (del + savings),40560 + 12830,53390,BDT/month,Line 62
+TOTAL RETURN,76,Total monthly revenue,72930 + 110565 + 53390,236885,BDT/month,Lines 73 + 74 + 75
+TOTAL RETURN,77,Total monthly cost,39000 + 21000,≤60000,BDT/month,Lines 47 + 63 (salary + programme)
+TOTAL RETURN,78,Net monthly return,236885 − 60000,≥176885,BDT/month,Lines 76 − 77
+TOTAL RETURN,79,First-month ROI,176885 / 70000 × 100,253,%,Line 78 ÷ Line 1
+TOTAL RETURN,80,Conservative ROI (80% ramp + 30% fix),,171,%,"Lines 45×0.8, Line 62×0.6, same transfers"
+TOTAL RETURN,81,Month 2+ recurring cost (salary only),,39000,BDT/month,Line 47 (no one-time costs)
+TOTAL RETURN,82,Month 2+ return,,>200000,BDT/month,Lines 73 + 74 + 75 (full ramp + dispatch effect)

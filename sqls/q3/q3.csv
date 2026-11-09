@@ -1,0 +1,7 @@
+hub_name,total_holds,agent_side_holds,agent_side_pct,top_reason_1,top_reason_2
+Riverside,874,563,64.4,Late Dispatch (312),Not Attempted (132)
+Brookside,186,49,26.3,Late Dispatch (17),Agent Time Shortage (16) / Not Attempted (16)
+Hillcrest,182,40,22.0,Late Dispatch (20),Agent Time Shortage (10) / Not Attempted (10)
+Greenfield,168,32,19.0,Agent Time Shortage (13),Not Attempted (11)
+Westwood,146,30,20.5,Agent Time Shortage (13),Late Dispatch (10)
+Lakeview,123,26,21.1,Agent Time Shortage (10),Not Attempted (9)

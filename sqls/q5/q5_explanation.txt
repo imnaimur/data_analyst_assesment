@@ -1,0 +1,67 @@
+Q5. HIGH-RETURN AGENTS - EXPLANATION
+====================================
+
+Question
+--------
+Find the agents with more than 30 days of tenure on 26 October 2026
+whose return ratio is above 15%.
+
+
+Tables used
+-----------
+agents     -> joining_date (for tenure), agent name, hub
+order_logs -> each agent's Assigned and Returned events
+hubs       -> hub names
+
+
+Assumptions
+-----------
+1. Tenure = 26 Oct 2026 - joining_date, in days. "More than 30 days"
+   means tenure_days > 30.
+2. Return ratio = returned attempts / total attempts, where each 'Assigned'
+   event is one attempt (per the case notes). Measured over the full
+   14 days (13-26 Oct).
+   Checked: using returned / (delivered + returned) instead gives the
+   same three agents.
+3. Inactive agents are included in the check; none of them qualify.
+
+
+How the query works
+-------------------
+Step 1 - agent_returns
+  Joins agents -> order_logs -> hubs.
+  DATE '2026-10-26' - joining_date -> tenure in days. In PostgreSQL,
+  subtracting one DATE from another gives a whole number of days.
+  COUNT(*) FILTER (WHERE status = 'Assigned') -> attempts
+  COUNT(*) FILTER (WHERE status = 'Returned') -> returned
+  GROUP BY agent -> one row per agent.
+
+Step 2 - final SELECT
+  return_ratio_pct = returned * 100.0 / attempts, rounded to 1 decimal.
+  WHERE keeps agents that pass BOTH conditions:
+    tenure_days > 30  AND  returned * 100.0 / attempts > 15
+  The WHERE repeats the formula instead of using return_ratio_pct,
+  because SQL does not allow a column alias from the SELECT to be used
+  in the WHERE of the same query.
+
+
+Result
+------
+Agent | Name            | Hub       | Joined     | Tenure | Attempts | Returned | Return ratio
+------+-----------------+-----------+------------+--------+----------+----------+-------------
+A1045 | Belis Rowntree  | Brookside | 2025-07-20 |    463 |      349 |       94 | 26.9%
+A1046 | Coris Halvorsen | Brookside | 2025-01-17 |    647 |      414 |       91 | 22.0%
+A1047 | Wenian Vantell  | Brookside | 2025-05-18 |    526 |      413 |       72 | 17.4%
+
+
+Key findings
+------------
+- All three high-return agents are from Brookside. This explains why
+  Brookside had the second-highest return share of held orders in Q4 (11.4%).
+- A1050 (also Brookside) has a 22.8% return ratio but is excluded because
+  their tenure is only 20 days (joined 6 Oct 2026). Worth watching as a
+  new joiner, not counted in the answer.
+- There is a clear gap: every other agent's return ratio is 8.1% or lower,
+  so the 15% cut-off is not borderline for anyone.
+- Since the problem is concentrated in a few named agents in one hub, it
+  points to coaching/performance management at Brookside, not hiring.

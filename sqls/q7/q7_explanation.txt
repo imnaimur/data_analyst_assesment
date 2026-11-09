@@ -1,0 +1,137 @@
+Q7. AGENTS NEEDED FOR THE FORECAST - EXPLANATION & STEP-BY-STEP GUIDE
+======================================================================
+
+Question
+--------
+Calculate required agents and the staffing gap for each of the four
+forecast weeks.
+
+
+PART A - HOW TO THINK ABOUT THE QUESTION (before writing any SQL)
+==================================================================
+
+Step A1 - Break the question into two numbers
+  required agents = how many agents each hub NEEDS in each forecast week
+  staffing gap    = required agents - agents the hub HAS
+  So for every hub + forecast week we need "need" and "have".
+
+Step A2 - Find the rules in the PDF case notes
+  - "The standard workload of an agent is 40 attempts a day ...
+     The planning target is 85% of the standard workload."
+       -> plan for 0.85 x 40 = 34 attempts per agent per day
+  - "Hubs operate every calendar day, so each forecast week has 7
+     operating days. For staffing, count every active agent as
+     available every day."
+       -> one agent can handle 34 x 7 = 238 attempts per week
+  - "Inactive agents left the company at the end of Week 1."
+       -> "have" = Active agents only
+
+Step A3 - Spot the trap: orders vs attempts
+  volume_forecast gives expected ORDERS.
+  But agent workload is measured in ATTEMPTS (Assigned events).
+  An order that is held gets attempted again the next day, so one order
+  can need 1, 2 or 3 attempts.
+  -> We must convert orders into attempts first:
+       expected_attempts = expected_orders x attempts_per_order
+  attempts_per_order comes from history: total attempts / total orders
+  in each hub over the 14 days.
+  (If you skip this step you UNDER-estimate the agents needed,
+   badly so for Riverside where 1 order = 1.35 attempts.)
+
+Step A4 - Write the formula
+  required_agents = expected_attempts / 238, ROUNDED UP
+  Rounded UP because you cannot hire 0.3 of an agent, and rounding
+  down would leave the hub above target.
+
+Step A5 - Find which tables have the pieces
+  volume_forecast -> expected_orders per hub per forecast week
+  orders          -> list of orders per hub (to count orders)
+  order_logs      -> Assigned events (to count attempts)
+  agents          -> Active agents per hub ("have")
+  hubs            -> hub names
+
+
+PART B - ASSUMPTIONS
+====================
+1. Planning capacity = 34 attempts per agent per day (85% of 40),
+   7 days a week -> 238 attempts per agent per week.
+2. attempts_per_order is each hub's own ratio over the full 14 days
+   (all Assigned events / all orders of that hub). The 14-day ratio is
+   used instead of Week 2 alone because Week 2 orders still on hold
+   have not finished all their attempts yet.
+3. The hub's attempts_per_order stays the same in the forecast weeks
+   (no improvement in hold rates is assumed).
+4. Available agents = Active agents today. Every active agent is
+   available every day (per case notes); no leave or absence assumed.
+5. Gap > 0 -> hub is short of agents. Gap < 0 -> hub has spare agents.
+
+
+PART C - HOW THE QUERY WORKS (step by step)
+===========================================
+
+Step 1 - attempts_per_order
+  Joins orders -> order_logs.
+  COUNT(*) FILTER (WHERE status = 'Assigned') -> attempts
+  COUNT(DISTINCT order_id)                    -> orders
+  attempts * 1.0 / orders                     -> attempts per order
+  (* 1.0 forces decimal division, same idea as 100.0 in Q2-Q6.
+   COUNT(DISTINCT ...) because one order has many log rows.)
+
+Step 2 - available_agents
+  COUNT(*) of agents WHERE active_status = 'Active', per hub.
+
+Step 3 - forecast_attempts
+  Joins volume_forecast -> attempts_per_order on hub_id.
+  expected_orders x attempts_per_order -> expected_attempts.
+  Gives one row per hub per forecast week (24 rows).
+
+Step 4 - final SELECT
+  CEIL(expected_attempts / (34 * 7.0)) -> required_agents
+    CEIL = round UP to the next whole number (12.1 -> 13).
+  required_agents - active_agents      -> staffing_gap
+  The CEIL formula is written twice because SQL does not let you reuse
+  the alias required_agents inside the same SELECT (same rule as Q2/Q5).
+
+
+PART D - CHECK IT BY HAND
+=========================
+Riverside, week of 27 Oct:
+  14-day history: 5,332 attempts / 3,947 orders = 1.351 attempts per order
+  Expected attempts = 2,170 x 1.351              = 2,931
+  Required agents   = 2,931 / 238 = 12.3  -> round up = 13
+  Active agents     = 12
+  Staffing gap      = 13 - 12 = +1  (short by 1)   -> matches query
+
+
+PART E - RESULT
+===============
+Required agents per forecast week (gap in brackets, + = short, - = spare)
+
+Hub        | Active | 27 Oct   | 03 Nov   | 10 Nov   | 17 Nov
+-----------+--------+----------+----------+----------+---------
+Greenfield |     10 | 12 (+2)  | 12 (+2)  | 12 (+2)  | 12 (+2)
+Hillcrest  |      9 | 11 (+2)  | 11 (+2)  | 11 (+2)  | 11 (+2)
+Riverside  |     12 | 13 (+1)  | 13 (+1)  | 13 (+1)  | 13 (+1)
+Westwood   |      9 |  9 ( 0)  |  9 ( 0)  |  9 ( 0)  |  9 ( 0)
+Brookside  |     11 |  9 (-2)  | 10 (-1)  | 10 (-1)  |  9 (-2)
+Lakeview   |     11 |  7 (-4)  |  8 (-3)  |  8 (-3)  |  8 (-3)
+
+Total short (Greenfield + Hillcrest + Riverside) = 5 agents every week.
+Total spare (Brookside + Lakeview)               = 4 to 6 agents.
+(The full 24-row output from the query has expected orders and attempts
+ for every week.)
+
+
+PART F - KEY FINDINGS
+=====================
+- Only 3 hubs are short: Greenfield (+2), Hillcrest (+2), Riverside (+1).
+  That is 5 agents, not the 8 the hub managers asked for.
+- Lakeview (3-4 spare) and Brookside (1-2 spare) have MORE agents than
+  they need, matching their low utilisation in Q2 (56% and 72%).
+- Company-wide the gap is about zero: the spare agents in Lakeview and
+  Brookside could cover most of the shortage if moved between hubs.
+- Riverside's shortage is caused by holds, not volume. It needs 1.35
+  attempts per order while every other hub needs ~1.07. If Riverside
+  fixed its agent-side holds (Late Dispatch, Q3) and reached a normal
+  1.07 ratio, it would need only 2,245 x 1.07 = ~2,413 attempts
+  -> 11 agents, i.e. 1 SPARE instead of 1 short.

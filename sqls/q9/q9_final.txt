@@ -1,0 +1,178 @@
+Q9. THE BUDGET
+===============
+Finance can release BDT 70,000 for next month. It must cover all one-
+time costs and the salary of any new agents for that month. How would
+you use it, and what do you expect it to return?
+
+
+ASSUMPTIONS
+============
+1. Fixed agent = BDT 650/day (16,900 / 26); monthly = 650 × 30 = BDT 19,500.
+2. Variable agent = 300 + 14 × deliveries/day; at 32 deliveries = BDT 748/day.
+   Breakeven: 650 = 300 + 14d → d = 25. Hubs needing agents are above 25, so Fixed is cheaper.
+3. One-time hiring costs (costs tab of cost_sheet.xlsx) are not in the dataset.
+   Three scenarios are shown (BDT 5,000 / 10,000 / 15,500 per agent).
+4. Avg delivery charge = BDT 65/order (orders table, 22,789 orders).
+5. Transfers between hubs add zero salary cost — agents are already on payroll.
+6. 50% Late Dispatch reduction at Riverside is an operational target; conservative (30%) noted.
+
+
+THE BUDGET CONSTRAINT
+======================
+The 8-agent request costs BDT 156,000 in salary alone — 2.2× the entire
+budget. Even 5 agents (Q7 gap) costs BDT 97,500. What can BDT 70,000
+actually buy?
+
+  One-time cost/agent | Max Fixed hires | Remaining
+  --------------------+-----------------+----------
+  BDT 0               |               3 | BDT 11,500
+  BDT 5,000           |               2 | BDT 21,000
+  BDT 10,000          |               2 | BDT 11,000
+  BDT 15,500          |               2 |  BDT 1,000
+
+At any realistic one-time cost the budget supports exactly 2 hires.
+Hiring alone cannot close the gap — the company must combine hiring
+with zero-cost moves.
+
+
+THE PLAN
+=========
+
+MOVE 1 — Transfer 3 agents from Lakeview (BDT 0)
+
+Lakeview has 11 agents but needs only 8 (Q7). At 56.2% utilisation (Q2)
+its agents deliver just 20.4 orders/day each (Q1) — not because they
+are slow, but because there are not enough orders. Its cost per delivery,
+BDT 31.06, is the highest in the company (Q6) purely due to idle
+overhead. Moving 3 of its 8 Fixed agents to Greenfield (2) and
+Hillcrest (1) fixes both problems at once: the receiving hubs get the
+agents they need, and Lakeview's cost per delivery drops from BDT 31.06
+to ~BDT 22.15 (−29%) by right-sizing to 8 agents.
+
+The transferred agents move from 20.4 deliveries/day each at Lakeview
+to 32–35/day at the busier hubs (Q1 Week 2 averages: Greenfield 32.0,
+Hillcrest 34.6). The gain:
+
+  Location    | Agents | Del/agent/day | Del/day | Del/month
+  ------------+--------+---------------+---------+----------
+  At Lakeview |      3 |          20.4 |    61.2 |    1,836
+  At new hubs |      3 |          32.9 |    98.6 |    2,958
+  ------------+--------+---------------+---------+----------
+  NET GAIN    |        |               |   +37.4 |   +1,122
+
+  Revenue: 1,122 × BDT 65 = BDT 72,930/month.  Cost: BDT 0.
+
+MOVE 2 — Hire 2 Fixed agents (BDT 39,000 salary + one-time costs)
+
+After the transfers, two gaps remain. Hillcrest is still short by 1 —
+at 95.9% utilisation (Q2) and 34.6 deliveries/agent/day (Q1) its
+agents are already at the planning ceiling. Riverside is short by 1,
+though that gap is caused by dispatch waste, not volume (Q3/Q8); the
+hire is a buffer while operations are fixed.
+
+  Hub       | Attempts/day | ÷ Att/order | = Del/day | × 30 days | Del/month | × BDT 65  | Revenue
+  ----------+--------------+-------------+-----------+-----------+-----------+-----------+--------
+  Hillcrest |           34 |       1.078 |      31.5 |       945 |       945 | BDT 65    | 61,425
+  Riverside |           34 |       1.351 |      25.2 |       756 |       756 | BDT 65    | 49,140
+  ----------+--------------+-------------+-----------+-----------+-----------+-----------+--------
+  TOTAL     |              |             |           |           |     1,701 |           | 110,565
+
+  Cost: 2 × BDT 19,500 = BDT 39,000.  Net: BDT 71,565/month.
+  Payback: 39,000 / (110,565 / 30) = 10.6 days.
+
+MOVE 3 — Riverside dispatch programme (remainder: BDT 0–21,000)
+
+Riverside's 312 Late Dispatch holds per week (Q3) each trigger a re-
+attempt the next day. At BDT 19.12 per attempt (650 / 34), this wastes
+BDT 5,965/week — BDT 25,650/month — more than the salary of one new
+agent. If the programme halves Late Dispatch:
+
+  Metric                   | Calculation              | Result
+  -------------------------+--------------------------+----------------
+  Freed attempts/month     | 156/wk × 4.3            |            671
+  Additional deliveries    | 671 / 1.075              |            624
+  Revenue                  | 624 × BDT 65             | BDT 40,560
+  Agent-time savings       | 671 × BDT 19.12          | BDT 12,830
+  -------------------------+--------------------------+----------------
+  Combined monthly benefit |                          | BDT 53,390
+  Programme cost (one-time)|                          | ≤ BDT 21,000
+
+  At a conservative 30% reduction the benefit is still ~BDT 32,000/month.
+
+
+BUDGET ALLOCATION
+==================
+
+                              | Low OTC    | Mid OTC    | High OTC
+                              | (5,000/ea) | (10,000/ea)| (15,500/ea)
+------------------------------+------------+------------+------------
+One-time hiring costs (×2)    |    10,000  |    20,000  |    31,000
+First-month salary (×2 Fixed) |    39,000  |    39,000  |    39,000
+Riverside dispatch programme  |    21,000  |    11,000  |         0
+------------------------------+------------+------------+------------
+TOTAL                         |    70,000  |    70,000  |    70,000
+
+
+EXPECTED RETURN (first month)
+==============================
+
+Source                  | Extra del. | Revenue     | Cost        | Net
+------------------------+------------+-------------+-------------+--------
+Transfers (3 agents)    |      1,122 | BDT  72,930 |       BDT 0 |  72,930
+New hires (2 agents)    |      1,701 | BDT 110,565 |  BDT 39,000 |  71,565
+Dispatch fix + savings  |        624 | BDT  53,390 | ≤BDT 21,000 | ≥32,390
+------------------------+------------+-------------+-------------+--------
+TOTAL                   |      3,447 | BDT 236,885 | ≤BDT 60,000 |≥176,885
+
+  First-month ROI: 176,885 / 70,000 = 253%
+  Conservative (80% ramp-up, 30% dispatch fix): 171%
+  Month 2+ (no one-time costs): salary BDT 39,000 vs return >BDT 200,000
+
+
+BEFORE vs AFTER
+================
+
+Hub        | Agents | Util  | Cost/del  ‖ Agents | Util  | Cost/del
+           | NOW    | NOW   | NOW       ‖ AFTER  | AFTER | AFTER
+-----------+--------+-------+-----------++--------+-------+----------
+Greenfield |     10 | 88.6% | BDT 21.69 ‖     12 |  ~83% | ~BDT 22
+Hillcrest  |      9 | 95.9% | BDT 21.83 ‖     11 |  ~83% | ~BDT 22
+Riverside  |     12 | 90.8%*| BDT 27.00 ‖     13 |  ~84% | ↓ w/ fix
+Westwood   |      9 | 80.4% | BDT 22.02 ‖      9 |  ~82% | ~BDT 22
+Brookside  |     11 | 71.5% | BDT 26.91 ‖     11 |  ~72% | ~BDT 27
+Lakeview   |     11 | 56.2% | BDT 31.06 ‖      8 |  ~77% | ~BDT 22
+-----------+--------+-------+-----------++--------+-------+----------
+Company    |     62 |       | BDT 24.76 ‖     64 |       | ↓ improved
+
+* 18.4% of Riverside's utilisation is avoidable re-attempts (Q3).
+All 6 hubs move into the 72–84% healthy band. Capacity headroom
+doubles from 7.3% to 15.6%.
+
+
+RISKS
+======
+1. High one-time costs may eliminate the dispatch programme budget.
+   The 2 hires + 3 transfers still stand alone; dispatch waits a cycle.
+2. Transfers blocked → hire a 3rd agent (BDT 58,500 salary); feasible
+   only at low one-time costs.
+3. Forecast misses → exposure limited to BDT 39,000/month (vs
+   BDT 156,000 for 8 hires).
+4. Ramp-up takes 1–2 weeks → at 80% target, net still positive
+   (BDT 49,450 from hires alone).
+5. Dispatch fix underperforms → at 30% reduction, benefit still
+   ~BDT 32,000/month against ≤BDT 21,000 cost.
+
+
+FINAL ANSWER
+=============
+Hire 2 Fixed agents (Hillcrest + Riverside): BDT 39,000 salary + one-
+time costs. Transfer 3 from Lakeview to Greenfield (2) and Hillcrest
+(1): BDT 0. Invest the remainder in Riverside's Late Dispatch fix.
+
+  New headcount: 2     Budget: BDT 70,000     ROI: 253%
+  Extra deliveries: 3,447/month     Net return: ≥ BDT 176,885
+
+The budget is too small for 8 hires and too valuable to spend only on
+salary. Two agents where they matter most, three redeployed at zero
+cost, and one targeted operational fix — every gap closed, every hub
+balanced, and the investment repaid within two weeks.

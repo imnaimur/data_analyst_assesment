@@ -1,0 +1,269 @@
+Q10. THE RISKS — ANALYSIS
+==========================
+
+Question
+--------
+What could make your plan fail, and how would you know within the
+first two weeks?
+
+
+THE PLAN (recap from Q8/Q9)
+============================
+1. Transfer 3 agents from Lakeview → Greenfield (2), Hillcrest (1).
+2. Hire 1 Fixed agent for Hillcrest, 1 Fixed agent for Riverside.
+3. Run a Late Dispatch improvement programme at Riverside.
+Total budget: BDT 70,000.
+
+
+RISK 1 — TRANSFERS FAIL (agents cannot or will not move hubs)
+==============================================================
+
+What goes wrong:
+  Lakeview agents may live near that hub. Reassigning them to
+  Greenfield or Hillcrest could mean a longer commute, unfamiliar
+  routes, or resistance from the agents themselves. If even 1 of the
+  3 transfers does not happen, Greenfield or Hillcrest stays short.
+
+Impact:
+  Each unfilled transfer = 1 hub still short by 1 agent = ~238 un-
+  served attempts per week = ~222 delayed deliveries per week.
+  Revenue at risk: 222 × BDT 65 = ~BDT 14,400/week.
+
+Early-warning signal (by day 3):
+  - Transfer acceptance rate. If any agent declines by end of day 2,
+    the gap persists. Track: has the agent physically reported to the
+    new hub and been assigned orders?
+
+Mitigation:
+  a) Offer a temporary transfer allowance (commute subsidy) from the
+     Riverside programme budget — BDT 2,000–3,000 per agent covers
+     transport for a month.
+  b) If a transfer falls through, escalate to Scenario B from Q8:
+     hire the position instead. Budget impact: 1 extra hire =
+     BDT 18,200, pushing total to BDT 54,600 — still within the
+     BDT 70,000 envelope.
+  c) Prioritise transferring Fixed agents from Lakeview (8 available);
+     their cost is the same regardless of hub, so no pay negotiation.
+
+
+RISK 2 — FORECAST VOLUME DOES NOT MATERIALISE
+===============================================
+
+What goes wrong:
+  The volume forecast (27 Oct – 23 Nov) is based on a trend from just
+  2 weeks of data. If the Week 2 volume surge was a one-off (e.g. a
+  promotional campaign that ended), actual orders could fall back to
+  Week 1 levels. Then the new hires are underutilised and the company
+  is paying for agents it does not need.
+
+Impact:
+  If volume drops to Week 1 levels (~9,700 orders/week vs forecast
+  ~14,200/week), even current staffing is more than enough. The 2 new
+  hires would cost BDT 36,400 with little to show for it.
+
+Early-warning signal (by end of week 1, 2 Nov):
+  - Actual orders vs forecast for the first week (27 Oct – 2 Nov).
+    The forecast says 14,255 orders that week. If actual orders fall
+    below 12,000 (>15% miss), the volume trend is weaker than
+    expected.
+  - Track DAILY orders by hub, not just the weekly total. A hub-level
+    miss matters more than a company-wide one (the plan is hub-
+    specific).
+
+Mitigation:
+  a) This is why the plan hires only 2 agents (not 8). Two Fixed
+     agents at BDT 36,400 is a manageable downside. Eight at
+     BDT 145,600 would be painful.
+  b) If the plan used Variable agents instead (Q9, Option B), their
+     cost scales down with volume: at 20 deliveries/day each agent
+     costs BDT 580/day instead of BDT 650. This provides a natural
+     hedge.
+  c) Delay hiring by 1 week: run the first forecast week (27 Oct –
+     2 Nov) with transfers only. If volume tracks forecast, hire in
+     week 2. Cost of this delay: 1 week of 2 short positions =
+     ~444 delayed deliveries, but it avoids committing to hires on
+     an unproven forecast.
+
+
+RISK 3 — RIVERSIDE'S LATE DISPATCH IS NOT FIXED
+=================================================
+
+What goes wrong:
+  The dispatch improvement programme may fail to reduce Late Dispatch
+  holds. Causes: the root cause is systemic (e.g. warehouse processes
+  outside hub control), or the hub manager does not prioritise it, or
+  the fix takes longer than 2 weeks.
+
+Impact:
+  Riverside stays at 1.35 attempts per order. The 1 buffer agent
+  covers the gap for now, but the hub remains the most expensive in
+  the network (BDT 27/delivery in Week 2, Q6), and if volume grows
+  further, 13 agents will not be enough.
+  Wasted re-attempts continue: ~312/week × BDT 19 = ~BDT 5,900/week
+  in agent time on avoidable holds.
+
+Early-warning signal (by end of week 1):
+  - Daily Late Dispatch count at Riverside. Currently 312/week
+    (~45/day). Track it daily. If it has not dropped below 35/day
+    by end of week 1, the programme is not working.
+  - Riverside's attempts-per-order for the first week. It was 1.351
+    over the 14-day history. If the first forecast week is still
+    above 1.25, the fix is too slow.
+
+Mitigation:
+  a) Assign a dedicated person (ops analyst or hub supervisor) to own
+     the dispatch audit at Riverside. A programme with no owner fails.
+  b) Start with the quickest wins: enforce a dispatch cut-off time
+     (e.g. all orders dispatched by 9 AM), and flag Late Dispatch
+     to the agent's supervisor the same day.
+  c) If the programme fails after 2 weeks, consider transferring 1
+     agent from Brookside (which has 1 spare) to Riverside. This is
+     Q8 Scenario D — zero incremental cost, but removes Brookside's
+     buffer.
+
+
+RISK 4 — NEW HIRES DO NOT RAMP UP FAST ENOUGH
+===============================================
+
+What goes wrong:
+  A new agent may take 1–2 weeks to learn routes, build customer
+  familiarity, and reach the 34 attempts/day planning target. During
+  ramp-up they operate at perhaps 20–25 attempts/day, which means the
+  hub is still functionally short.
+
+Impact:
+  Hillcrest (95.9% utilised in Week 2, the highest in the company) is
+  the most sensitive. If its new agent only handles 25 attempts/day
+  for the first 2 weeks, the hub is still short by roughly 0.4 agents
+  — manageable but tight.
+
+Early-warning signal (by end of week 1):
+  - New agent's daily attempt count. Pair it against the hub average.
+    If the new agent is below 25 attempts/day by day 5, ramp-up is
+    slower than expected.
+  - Hold and return rates for new agent's orders. A new agent
+    unfamiliar with routes may produce more holds (wrong addresses,
+    late arrivals).
+
+Mitigation:
+  a) Pair each new hire with an experienced agent for the first 3
+     days (buddy system). This costs some of the experienced agent's
+     capacity but accelerates the new agent's learning.
+  b) Assign the new agent to well-known, high-density routes first
+     (shorter distances, fewer navigation problems).
+  c) If ramp-up is slow, temporarily increase the existing agents'
+     workload from 34 to 37–38 attempts/day. Week 2 data shows agents
+     can handle above-40 loads for short periods (85 agent-days
+     exceeded 40 attempts, Q1).
+
+
+RISK 5 — AGENT-SIDE HOLDS SPREAD BEYOND RIVERSIDE
+===================================================
+
+What goes wrong:
+  The other five hubs currently have agent-side hold rates of 19–26%
+  (Q3). If volume rises and agents are stretched, these rates could
+  increase — especially "Agent Time Shortage" holds, which were the
+  top agent-side reason at Greenfield, Westwood and Lakeview. More
+  holds → more re-attempts → staffing gap widens.
+
+Impact:
+  If Greenfield's hold rate doubles from 168 to 336 per week, its
+  attempts-per-order rises from 1.073 to ~1.15. At peak forecast
+  (2,570 orders), that is 2,956 attempts instead of 2,758 — requiring
+  13 agents, not 12. The plan's 12 would then be short by 1.
+
+Early-warning signal (by end of week 1):
+  - Hub-level hold rates, especially agent-side holds, compared to
+    Week 2 baselines. Any hub whose agent-side holds jump by more
+    than 50% is heading for trouble.
+  - "Agent Time Shortage" holds specifically, since these directly
+    signal that agents are overloaded.
+
+Mitigation:
+  a) The plan already keeps Brookside at 11 agents (1 spare) as a
+     company-wide buffer. If another hub's holds spike, move the
+     spare agent there.
+  b) Monitor daily, not weekly. Weekly averages mask a bad Wednesday
+     that gets worse by Friday.
+
+
+RISK 6 — HIGH-RETURN AGENTS CONTINUE TO UNDERPERFORM
+=====================================================
+
+What goes wrong:
+  Q5 identified 3 agents at Brookside (A1045, A1046, A1047) with
+  return ratios of 17–27%, far above the company norm. These are
+  experienced agents (>1 year tenure) who consistently return orders
+  instead of delivering them. If this continues unaddressed, Brookside
+  loses effective capacity: it has 11 agents on paper, but 3 of them
+  convert a quarter of their attempts to returns.
+
+Impact:
+  Brookside's current surplus of 1 agent masks this problem. If the
+  3 high-return agents continue at their current rate, Brookside's
+  effective delivery capacity is closer to 9.5 agents — turning its
+  surplus into a slight deficit.
+
+Early-warning signal (by end of week 1):
+  - Daily return ratio for A1045, A1046, A1047. If it remains above
+    15%, the performance issue is ongoing.
+
+Mitigation:
+  a) Investigate root cause: are these agents misassigned (wrong
+     routes, wrong customer segments)? Are they cherry-picking easy
+     orders? Are they on routes with genuinely difficult customers?
+  b) A performance improvement plan (PIP) for agents above 20%
+     return ratio with >30 days tenure.
+  c) Reassign these agents to routes with higher delivery success
+     rates as a diagnostic step — if returns drop, the problem was
+     route-specific, not agent-specific.
+
+
+MONITORING DASHBOARD (what to track in the first 2 weeks)
+==========================================================
+
+The operations team should track the following metrics DAILY, starting
+27 October, with alerts if thresholds are breached:
+
+Metric                  | Source    | Alert threshold
+------------------------+----------+-------------------------------
+Orders per hub per day  | orders   | >15% below forecast
+Attempts per agent/day  | order_logs| >40 (overloaded) or <25 (idle)
+Late Dispatch count     | order_logs| >35/day at Riverside
+  (Riverside)           |          |
+Agent-side hold rate    | order_logs| >30% at any hub
+  per hub               |          |
+New agent attempts/day  | order_logs| <25 by day 5
+Return ratio (flagged   | order_logs| Still >15% in week 1
+  agents from Q5)       |          |
+Transfer status         | HR/ops   | Any transfer not completed by
+                        |          | day 3
+
+This dashboard is a natural extension of the Task 3 deliverable:
+the same data sources power both the retrospective analysis (Q1–Q7)
+and the forward-looking monitoring.
+
+
+SUMMARY
+========
+The plan's main vulnerability is not any single risk but the
+compounding effect: if transfers fail AND the Riverside fix stalls AND
+a new hire ramps slowly, the company is back to being short 3–4 agents
+across multiple hubs — close to the hub managers' original request for
+8, and now 2 weeks behind.
+
+The defences are layered:
+  1. Keep Brookside's spare agent as a float (not transferred out).
+  2. Monitor daily (not weekly) with clear thresholds.
+  3. Have a pre-agreed escalation: if 2+ risks materialise by end of
+     week 1, convert to Scenario B (hire 5 agents, total BDT 91,000 —
+     which needs an additional BDT 21,000 budget release from Finance).
+  4. The BDT 70,000 budget itself is a risk hedge: by spending only
+     BDT 36,400 on guaranteed salary, BDT 33,600 remains flexible for
+     whatever the first week reveals.
+
+The worst outcome is not spending too little — it is spending too much
+too soon on hiring, before understanding whether the real problem is
+capacity or operations. This plan gives the company two weeks to learn
+the answer while covering the most urgent gaps.

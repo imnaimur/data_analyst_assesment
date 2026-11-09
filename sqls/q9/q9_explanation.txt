@@ -1,0 +1,636 @@
+Q9. THE BUDGET — STRATEGIC ASSESSMENT
+=======================================
+
+Question
+--------
+Finance can release BDT 70,000 for next month. It must cover all one-
+time costs and the salary of any new agents for that month. How would
+you use it, and what do you expect it to return?
+
+
+===============================================================================
+1. THE KEY OPERATIONAL PROBLEM
+===============================================================================
+
+The company does not have one problem — it has two, and they require
+different treatments:
+
+PROBLEM A — CAPACITY MISMATCH (between hubs, not company-wide)
+  Three hubs (Greenfield, Hillcrest, Riverside) are short by a combined
+  5 agents at the planning target. Two hubs (Lakeview, Brookside) have
+  a combined 4 surplus agents. Company-wide, the net gap is just +1
+  (Q7/Q8). The capacity problem is a distribution problem, not an
+  absolute shortage.
+
+  Evidence:
+  - Greenfield: 88.6% utilisation in W2 with 10 agents; needs 12 (Q2/Q7)
+  - Hillcrest: 95.9% utilisation in W2 with 9 agents; needs 11 (Q2/Q7)
+  - Lakeview: 56.2% utilisation with 11 agents; needs only 8 (Q2/Q7)
+  - Brookside: 71.5% utilisation with 11 agents; needs only 10 (Q2/Q7)
+
+PROBLEM B — OPERATIONAL WASTE AT RIVERSIDE
+  Riverside's 874 holds in Week 2 — 563 of them agent-side (64.4%) —
+  consume 18.4% of the hub's total attempts on avoidable re-delivery
+  cycles (Q3). This inflates Riverside's attempts-per-order to 1.351
+  versus the company average of 1.075, creating a phantom staffing gap
+  of +1 that would become a surplus of -1 if dispatch were fixed (Q8).
+  The wasted agent time costs an estimated BDT 10,753 per week (see
+  Section 4).
+
+WHY BOTH MATTER FOR THE BUDGET
+  If the BDT 70,000 goes entirely to hiring, it addresses Problem A
+  but leaves Problem B untouched. Riverside continues to burn agent
+  time on avoidable re-attempts, and within a quarter the hub will
+  request yet another agent. The budget should address both — staffing
+  the genuine gaps AND reducing the operational waste.
+
+
+===============================================================================
+2. POSSIBLE INTERVENTIONS — COMPARED
+===============================================================================
+
+OPTION 1: HIRE NEW AGENTS ONLY
+  What it does: adds headcount at understaffed hubs.
+  Cost: BDT 19,500/month per Fixed agent (650/day × 30 days).
+         BDT 22,440/month per Variable agent at 32 deliveries/day
+         (300 + 14 × 32 = 748/day × 30 days).
+  Budget constraint:
+
+  One-time cost/agent | Max Fixed hires | Remaining budget
+  --------------------+-----------------+-----------------
+  BDT 0               |               3 |        BDT 11,500
+  BDT 5,000           |               2 |        BDT 21,000
+  BDT 10,000          |               2 |        BDT 11,000
+  BDT 15,000          |               2 |         BDT 1,000
+
+  The budget CANNOT fund more than 3 Fixed hires even at zero one-time
+  cost. The 8-agent request (8 × 19,500 = BDT 156,000 salary alone)
+  exceeds the budget by BDT 86,000 — before any one-time costs. Even
+  the Q7 gap of 5 (5 × 19,500 = BDT 97,500) is unaffordable.
+
+  Advantage: directly adds delivery capacity where needed.
+  Limitation: cannot fill more than 2–3 positions; does nothing for
+    Riverside's dispatch problem; surplus at Lakeview remains idle.
+
+OPTION 2: REALLOCATE EXISTING AGENTS FROM SURPLUS HUBS
+  What it does: moves 3 agents from Lakeview (which has 3 surplus) to
+    Greenfield (2) and Hillcrest (1), filling 3 of the 5-position gap.
+  Cost: BDT 0 in additional salary — these agents are already on payroll.
+    Potential minor costs: transfer logistics, route familiarisation.
+  Budget impact: frees the entire BDT 70,000 for other uses.
+
+  Advantage: fills 3 positions at zero incremental salary cost; improves
+    Lakeview's cost per delivery by right-sizing the workforce.
+  Limitation: requires agents to change hub (commute, new routes);
+    may face resistance. Does not create net new capacity — only
+    redistributes it.
+
+OPTION 3: INVEST IN REDUCING AGENT-SIDE HOLDS AT RIVERSIDE
+  What it does: fixes the root cause of Riverside's inflated workload.
+  Cost: process audit, dispatcher training, routing tool — variable,
+    depends on interventions chosen (see Section 3).
+  Expected capacity gain: 312 Late Dispatch holds/week = 312 freed
+    attempts/week if fully resolved = 1.3 agents of capacity (Q8).
+
+  Advantage: addresses root cause, not symptoms; benefits compound
+    over time; reduces cost per delivery at Riverside permanently.
+  Limitation: takes 2–4 weeks to show full effect; requires management
+    commitment and operational follow-through at the hub level.
+
+RECOMMENDED APPROACH: COMBINE ALL THREE
+  Transfers (Option 2) handle the bulk of the capacity gap at zero cost.
+  Hiring (Option 1) fills the remaining 2 positions the transfers
+  cannot cover. The residual budget funds dispatch improvement at
+  Riverside (Option 3). This is the only approach that addresses both
+  Problem A and Problem B within the BDT 70,000 constraint.
+
+
+===============================================================================
+3. BUDGET ALLOCATION
+===============================================================================
+
+IMPORTANT NOTE ON ONE-TIME COSTS
+  The brief references one-time hiring costs in the "costs" tab of
+  cost_sheet.xlsx. This tab is not in the dataset. The allocation
+  below therefore presents the budget as a formula:
+
+    BDT 70,000 = (2 × one-time cost) + (2 × first-month salary) + ops fund
+
+  The one-time cost per agent is unknown. Rather than invent a figure,
+  the table below shows the allocation at three realistic levels.
+
+BUDGET BREAKDOWN (hiring 2 Fixed agents)
+
+                              | Low OTC    | Mid OTC    | High OTC
+                              | (5,000/ea) | (10,000/ea)| (15,500/ea)
+------------------------------+------------+------------+------------
+A. One-time costs (2 agents)  |    10,000  |    20,000  |    31,000
+B. First-month salary         |    39,000  |    39,000  |    39,000
+   (2 Fixed × BDT 650 × 30)  |            |            |
+------------------------------+------------+------------+------------
+   Subtotal (hiring)          |    49,000  |    59,000  |    70,000
+                              |            |            |
+C. Riverside ops fund         |    21,000  |    11,000  |         0
+   (remainder)                |            |            |
+------------------------------+------------+------------+------------
+   TOTAL                      |    70,000  |    70,000  |    70,000
+
+  Salary calculation:
+    Fixed agent daily rate = BDT 16,900 / 26 = BDT 650 (from agent_salary table)
+    Monthly cost = BDT 650 × 30 days = BDT 19,500 per agent
+    Two agents = BDT 39,000
+
+  This is the ONLY salary cost the budget needs to carry. The 3
+  transferred agents from Lakeview are already on the company's payroll
+  at their current rate. Their salaries shift from Lakeview's hub P&L to
+  Greenfield's and Hillcrest's, but do not increase total company cost.
+
+WHERE EACH AGENT AND EACH BDT GOES
+
+Item                          | Hub        | Amount     | Justification
+------------------------------+------------+------------+---------------------
+Transfer 2 agents (Lakeview→) | Greenfield | BDT 0      | Fills +2 gap; agents
+                              |            |            | already on payroll
+Transfer 1 agent (Lakeview→)  | Hillcrest  | BDT 0      | Fills 1 of +2 gap
+Hire 1 new Fixed agent        | Hillcrest  | salary     | Fills remaining +1;
+  + one-time cost             |            | + OTC      | hub at 95.9% util
+Hire 1 new Fixed agent        | Riverside  | salary     | Buffer while dispatch
+  + one-time cost             |            | + OTC      | is fixed (+1 gap)
+Riverside dispatch programme  | Riverside  | remainder  | Reduce 312 Late
+  (process audit, training,   |            | (0–21,000) | Dispatch holds/week
+  routing improvements)       |            |            |
+------------------------------+------------+------------+---------------------
+No action                     | Westwood   | BDT 0      | Balanced (gap = 0)
+No action                     | Brookside  | BDT 0      | Surplus; keep as
+                              |            |            | company buffer
+
+WHY FIXED AGENTS, NOT VARIABLE
+
+  The breakeven between Fixed and Variable is 25 deliveries per day:
+
+    Fixed daily cost:      BDT 650
+    Variable breakeven:    650 = 300 + 14d  →  d = 25
+
+  At the hubs receiving new agents:
+    Hillcrest W2 average:  34.6 deliveries/agent/day (Q1) → well above 25
+    Riverside W2 average:  24.2 deliveries/agent/day (Q1) → just below 25
+
+  For Hillcrest, Fixed is clearly cheaper (BDT 650 vs BDT 784/day).
+  For Riverside, Fixed and Variable are near-identical at current
+  workload. However, as the dispatch programme reduces holds and
+  Riverside's deliveries per agent rise, Fixed becomes progressively
+  cheaper. Hiring Fixed also gives a predictable cost that simplifies
+  budgeting.
+
+  The only scenario where Variable would be better is if forecast
+  volumes do not materialise (Section 7). In that case, Variable agents
+  cost less because their pay scales down with deliveries. But the
+  forecast shows steady or growing demand across all four weeks, so
+  this hedge is not worth the ongoing cost premium.
+
+
+===============================================================================
+4. EXPECTED RETURN — QUANTIFIED
+===============================================================================
+
+The return comes from three sources: (a) additional deliveries from the
+2 new hires, (b) additional deliveries from the 3 transferred agents
+working at busier hubs, and (c) reduced waste from the dispatch fix.
+
+SOURCE A — TWO NEW HIRES
+--------------------------
+
+Each new agent is placed at a hub operating above the planning target.
+Without them, some orders cannot be attempted each day. With them, the
+hub handles its full forecast volume.
+
+  Hillcrest new agent:
+    Expected attempts/day:   34  (planning target)
+    Expected deliveries/day: 34 / 1.078 = 31.5  (hub's attempts-per-order, Q7)
+    Deliveries/month:        31.5 × 30 = 945
+
+  Riverside new agent:
+    Expected attempts/day:   34
+    Expected deliveries/day: 34 / 1.351 = 25.2  (hub's current attempts-per-order)
+    Deliveries/month:        25.2 × 30 = 756
+
+  Calculation:
+    Additional deliveries from new hires = 945 + 756 = 1,701 per month
+
+    Revenue from additional deliveries:
+      1,701 × BDT 65 (avg delivery charge from orders table) = BDT 110,565
+
+    Cost of new hires:
+      2 × BDT 19,500 = BDT 39,000
+
+    Net contribution from new hires:
+      BDT 110,565 − BDT 39,000 = BDT 71,565 per month
+
+    Payback period:
+      BDT 39,000 salary / (BDT 110,565 / 30 days) = 10.6 days
+      The salary of both agents is recovered in less than 11 days of
+      their deliveries.
+
+  Note: this calculation assumes the new agents operate at the planning
+  target from day 1. In practice, there is a ramp-up period (see
+  Section 7). A conservative estimate using 80% of the planning target
+  for the first month reduces deliveries to 1,361 and revenue to
+  BDT 88,465 — still well above the BDT 39,000 cost.
+
+SOURCE B — THREE TRANSFERRED AGENTS (higher-value work)
+---------------------------------------------------------
+
+The 3 Lakeview agents are already on the company's payroll. At
+Lakeview, they deliver an average of 20.4 orders/day each (Q1 W2).
+When transferred to Greenfield and Hillcrest, they will work at
+those hubs' higher delivery rates.
+
+  Current output (at Lakeview):
+    3 agents × 20.4 deliveries/day = 61.2 deliveries/day
+
+  Expected output (at Greenfield/Hillcrest):
+    2 agents at Greenfield: 2 × 32.0 = 64.0 deliveries/day (Q1 W2 avg)
+    1 agent at Hillcrest:   1 × 34.6 = 34.6 deliveries/day (Q1 W2 avg)
+    Total: 98.6 deliveries/day
+
+  Net additional deliveries from reallocation:
+    98.6 − 61.2 = 37.4 additional deliveries/day
+    Monthly: 37.4 × 30 = 1,122 additional deliveries
+
+  Revenue from additional deliveries:
+    1,122 × BDT 65 = BDT 72,930
+
+  Incremental cost: BDT 0
+  (Agents' salaries are unchanged; only their location changes.)
+
+  This is pure value creation — the same payroll expense produces
+  1,122 more deliveries per month simply by putting agents where the
+  demand is.
+
+SOURCE C — RIVERSIDE DISPATCH IMPROVEMENT
+-------------------------------------------
+
+The dispatch improvement programme targets the 312 Late Dispatch holds
+per week identified in Q3. Each Late Dispatch hold wastes one agent-
+attempt the following day (the held order is re-attempted).
+
+  Cost of wasted re-attempts (current state):
+    Agent cost per attempt = BDT 650 / 34 = BDT 19.12
+    (One Fixed agent-day at BDT 650, divided by 34 attempts at the
+    planning target. This is the opportunity cost: each wasted attempt
+    is one attempt not spent on a new order.)
+
+    Weekly waste from Late Dispatch alone:
+      312 × BDT 19.12 = BDT 5,965/week
+
+    Monthly waste:
+      BDT 5,965 × 4.3 = BDT 25,650/month
+
+    Annual waste:
+      BDT 25,650 × 12 = BDT 307,800/year
+
+  If the programme reduces Late Dispatch by 50% (312 → 156/week):
+    Freed attempts: 156/week × 4.3 = 671 attempts/month
+    Additional deliveries: 671 / 1.075 ≈ 624 deliveries/month
+    (Using the company-average attempts-per-order, since the freed
+    attempts serve new orders that should not face the same hold issue.)
+
+    Revenue from additional deliveries:
+      624 × BDT 65 = BDT 40,560/month
+
+    Agent-time savings (opportunity cost recovered):
+      156 × 4.3 × BDT 19.12 = BDT 12,830/month
+
+    Total monthly benefit:
+      BDT 40,560 + BDT 12,830 = BDT 53,390
+
+    Programme cost: BDT 0–21,000 (from budget remainder, Section 3)
+
+  Note: the 50% reduction target is moderate. If achieved, the remaining
+  156 Late Dispatch cases/week should continue to decline as the
+  process improvements become routine.
+
+TOTAL EXPECTED RETURN (first month)
+-------------------------------------
+
+Source                | Extra deliveries | Revenue    | Cost       | Net
+----------------------+------------------+------------+------------+--------
+A. 2 new hires       |            1,701 | BDT 110,565| BDT 39,000*| 71,565
+B. 3 transfers        |            1,122 |  BDT 72,930|     BDT 0  | 72,930
+C. Dispatch fix (50%) |              624 |  BDT 40,560| ≤BDT 21,000| ≥19,560
+   + time savings     |                — |  BDT 12,830|            | 12,830
+----------------------+------------------+------------+------------+--------
+TOTAL                 |            3,447 | BDT 236,885| ≤BDT 60,000| ≥176,885
+
+* BDT 39,000 is the recurring monthly salary; one-time costs (paid from
+  the BDT 70,000 budget) are excluded from monthly net since they do
+  not recur.
+
+  First-month ROI on the BDT 70,000 budget:
+    Net return ÷ budget = BDT 176,885 / BDT 70,000 = 253%
+
+  Even under conservative assumptions (80% ramp-up for new hires, 30%
+  dispatch improvement instead of 50%), the return exceeds BDT 120,000
+  — still well above the BDT 70,000 investment.
+
+
+===============================================================================
+5. CALCULATIONS — FORMULAS AND ASSUMPTIONS
+===============================================================================
+
+All formulas used in this analysis, with the data source for each input:
+
+SALARY COSTS
+  Fixed daily rate    = monthly_salary / 26  = 16,900 / 26 = BDT 650
+                        (agent_salary table, per case notes)
+  Fixed monthly cost  = 650 × 30 days = BDT 19,500
+  Variable daily cost = daily_allowance + allowance_per_delivery × deliveries
+                      = 300 + 14 × d
+                        (agent_salary table)
+  Breakeven:            650 = 300 + 14d → d = 25 deliveries/day
+
+STAFFING GAP (from Q7)
+  Attempts-per-order    = hub Assigned events / hub distinct orders
+                          (order_logs + orders tables, 14-day history)
+  Expected attempts     = forecast orders × attempts-per-order
+                          (volume_forecast table)
+  Required agents       = CEIL(expected attempts / (34 × 7))
+                          (34 = 85% of 40 standard; 7 days/week)
+  Gap                   = required agents − active agents
+
+DELIVERY ESTIMATES
+  Deliveries per agent per day = hub W2 average from Q1 daily table
+    Greenfield: 32.0, Hillcrest: 34.6, Riverside: 24.2, Lakeview: 20.4
+    (order_logs, Delivered events per agent-day, W2 only)
+  New hire deliveries/day = planning target / attempts-per-order
+    Hillcrest:  34 / 1.078 = 31.5
+    Riverside:  34 / 1.351 = 25.2
+
+REVENUE
+  Avg delivery charge = BDT 65.03 ≈ BDT 65
+    (orders table, AVG(delivery_charge) across all 22,789 orders)
+
+DISPATCH WASTE
+  Agent cost per attempt = Fixed daily rate / planning target
+                         = 650 / 34 = BDT 19.12
+  Weekly waste = Late Dispatch holds × cost per attempt
+               = 312 × 19.12 = BDT 5,965
+    (312 Late Dispatch holds from Q3, Riverside, Week 2)
+
+ASSUMPTIONS DISTINGUISHED FROM DATA
+  DATA (from the dataset):
+    All salary rates, delivery charges, utilisation figures, hold counts,
+    agent counts, forecast volumes, and attempts-per-order ratios.
+
+  ASSUMPTIONS (not in the dataset):
+  1. One-time hiring costs — unknown (costs tab missing). Presented as
+     a variable with three scenarios (BDT 5,000 / 10,000 / 15,500).
+  2. The 50% dispatch improvement target — an estimate. The actual
+     reduction depends on implementation quality and root cause.
+  3. New hires reach the planning target from day 1 — optimistic.
+     The conservative scenario uses 80% of target for month 1.
+  4. Delivery charge = revenue — simplified. The actual revenue model
+     may include COD handling fees or other components not in the data.
+  5. Transferred agents achieve the receiving hub's average — they may
+     take 1–2 weeks to learn new routes and customer patterns.
+  6. The forecast is accurate — volumes materialise as projected. If
+     not, the return from new hires drops proportionally.
+
+
+===============================================================================
+6. BEFORE AND AFTER — COMPARISON
+===============================================================================
+
+STAFFING AND UTILISATION
+                      BEFORE (current)          AFTER (recommended plan)
+Hub        | Agents | Util (W2) | Status   | Agents | Util (forecast) | Status
+-----------+--------+-----------+----------+--------+-----------------+--------
+Greenfield |     10 |    88.6%  | Above    |     12 |          82.6%  | Healthy
+Hillcrest  |      9 |    95.9%  | Critical |     11 |          82.7%  | Healthy
+Riverside  |     12 |    90.8%* | Above    |     13 |    83.5%/66.4%**| Healthy
+Westwood   |      9 |    80.4%  | Healthy  |      9 |          81.9%  | Healthy
+Brookside  |     11 |    71.5%  | Under    |     11 |          71.8%  | Buffer
+Lakeview   |     11 |    56.2%  | Idle     |      8 |          77.0%  | Healthy
+-----------+--------+-----------+----------+--------+-----------------+--------
+TOTAL      |     62 |           |          |     64 |                 |
+
+* Riverside's 90.8% includes 18.4% avoidable re-attempts (productive
+  utilisation is only 74.0%).
+** 83.5% at current operations / 66.4% if dispatch is fixed (the
+  buffer agent then becomes reassignable).
+
+  Key changes:
+  - Greenfield and Hillcrest drop from above-target to healthy (~83%).
+  - Lakeview rises from 56% (idle) to 77% (productive), because its
+    3 surplus agents are moved to where the work is.
+  - No hub exceeds the 85% planning target.
+  - The company moves from 3 hubs above target and 2 below to all 6
+    hubs within the 70–85% healthy range.
+
+COST PER DELIVERY
+                      BEFORE (Week 2)           AFTER (projected)
+Hub        | Cost/delivery | Drivers        | Expected change
+-----------+---------------+----------------+---------------------------
+Greenfield |   BDT 21.69   | Efficient      | ~same (2 agents add cost
+           |               |                |  but also add volume)
+Hillcrest  |   BDT 21.83   | Efficient      | ~same (similar logic)
+Riverside  |   BDT 27.00   | High holds     | ↓ if dispatch fixed:
+           |               |                |  fewer wasted attempts
+           |               |                |  per delivery
+Westwood   |   BDT 22.02   | Balanced       | ~same (no change)
+Brookside  |   BDT 26.91   | High returns   | ~same (Q5 agents need
+           |               |                |  coaching, not budget)
+Lakeview   |   BDT 31.06   | Overstaffed    | ↓↓ significantly: 3 fewer
+           |               |                |  Fixed agents = ~BDT 19,500
+           |               |                |  less cost per week with
+           |               |                |  similar volume
+-----------+---------------+----------------+---------------------------
+Company    |   BDT 24.76   |                | ↓ weighted average improves
+
+  Lakeview improvement detail:
+    W2 weekly cost with 11 agents: BDT 47,588
+    W2 weekly cost estimate with 8 agents (remove 3 Fixed × 650 × 7):
+      BDT 47,588 − BDT 13,650 = BDT 33,938
+    Cost per delivery: BDT 33,938 / 1,532 = BDT 22.15
+    (down from BDT 31.06 — a 29% improvement in hub efficiency)
+
+DELIVERY CAPACITY
+                      BEFORE (62 agents)        AFTER (64 agents + ops fix)
+                      Weekly capacity at 34 attempts/agent/day, 7 days:
+                      62 × 238 = 14,756         64 × 238 = 15,232
+                                                (+ ~670 freed from dispatch fix)
+                                                Effective: ~15,900
+
+  Forecast demand (average week): ~12,500 orders × ~1.1 attempts/order
+                                  ≈ 13,750 attempts
+
+  Headroom:
+    Before:  14,756 − 13,750 = 1,006 spare attempts/week (7.3%)
+    After:   15,900 − 13,750 = 2,150 spare attempts/week (15.6%)
+
+  The after-plan leaves a healthy 16% buffer, absorbing daily
+  variability without pushing any hub above target.
+
+
+===============================================================================
+7. RISKS AND LIMITATIONS
+===============================================================================
+
+RISK 1: ONE-TIME COSTS CONSUME THE ENTIRE BUDGET
+  If one-time costs are BDT 15,500+ per agent, the entire BDT 70,000
+  goes to hiring with nothing left for the Riverside programme. This
+  is still a viable plan (the 2 hires + 3 transfers fill the capacity
+  gap), but Riverside's dispatch problem goes unaddressed until the
+  next budget cycle.
+  Mitigation: request the one-time cost data from the costs tab before
+  finalising the allocation.
+
+RISK 2: TRANSFERS ARE BLOCKED
+  If cross-hub transfer is not feasible (contractual, union, or
+  logistical barriers), the 3 transfer positions become 3 additional
+  hires. That requires BDT 58,500 in salary + one-time costs = at
+  least BDT 73,500, which exceeds the budget.
+  Mitigation: prioritise transfers — they are the plan's backbone. If
+  only 1 or 2 transfers succeed, hire 1 additional agent (total 3
+  hires = BDT 58,500 salary), which fits the budget at low-to-mid
+  one-time costs.
+
+RISK 3: FORECAST VOLUME DOES NOT MATERIALISE
+  The 4-week forecast is extrapolated from a 2-week trend. If Week 2's
+  volume surge was a one-off event, actual demand may revert to Week 1
+  levels (~9,700 orders/week vs ~12,500 forecast).
+  Impact: the 2 new hires would be underutilised, costing BDT 39,000/
+  month with lower returns. At Week 1 volumes, no hub is above target —
+  even the current 62 agents are sufficient.
+  Mitigation: the plan hires only 2 agents, limiting downside to
+  BDT 39,000/month. If volume falls, the Riverside buffer agent can be
+  redeployed. Compare with the 8-hire request at BDT 156,000/month —
+  the recommended plan has 4× less downside.
+
+RISK 4: NEW AGENT RAMP-UP IS SLOWER THAN ASSUMED
+  The return calculation assumes new agents work at the planning target
+  (34 attempts/day) from day 1. In practice, route learning and
+  customer familiarity may take 1–2 weeks. During ramp-up, output may
+  be 20–25 attempts/day.
+  Impact: first-month deliveries drop by ~20%, and revenue from Source
+  A falls from BDT 110,565 to ~BDT 88,450. The net return is still
+  positive (BDT 88,450 − 39,000 = BDT 49,450).
+  Mitigation: pair each new hire with an experienced agent for the
+  first 3 days; assign well-known, high-density routes first.
+
+RISK 5: RIVERSIDE DISPATCH FIX UNDERPERFORMS
+  The 50% Late Dispatch reduction is an estimate, not a guarantee. If
+  the root cause is systemic (e.g. warehouse processes outside hub
+  control), improvement may be slower or smaller.
+  Impact: Source C returns fall. At a 25% reduction instead of 50%,
+  the monthly benefit drops from ~BDT 53,390 to ~BDT 26,695. The
+  budget overall still returns positive.
+  Mitigation: the dispatch programme is funded from the REMAINDER of
+  the budget, not from a committed allocation. If one-time costs are
+  high and the remainder is small, the company loses little if the
+  programme is deferred. The 2 hires + 3 transfers stand on their own.
+
+RISK 6: RETURN ESTIMATES USE DELIVERY CHARGE AS REVENUE
+  The analysis uses the BDT 65 average delivery charge as the revenue
+  per delivery. Actual revenue may differ: delivery charges might be
+  partially offset by COD handling costs, refund costs on returned
+  orders, or other variables not in the dataset. The direction of the
+  estimate is correct, but the magnitude may vary.
+
+OVERALL RISK PROFILE
+  The plan's structure is deliberately conservative:
+  - Only 2 new hires (minimum viable commitment)
+  - Transfers carry zero incremental cost (reversible if needed)
+  - The Riverside programme is funded from the residual, not from a
+    fixed allocation
+  - Even under the worst reasonable scenario (ramp-up delays + dispatch
+    fix fails + volume misses by 20%), the plan returns more than its
+    cost in the first month
+
+
+===============================================================================
+8. FINAL RECOMMENDATION
+===============================================================================
+
+DECISION
+---------
+Allocate the BDT 70,000 as follows:
+
+  1. Hire 2 Fixed agents                      BDT 39,000 (salary)
+     - 1 for Hillcrest (most critical gap)     + one-time costs
+     - 1 for Riverside (buffer)
+
+  2. Transfer 3 agents from Lakeview           BDT 0
+     - 2 to Greenfield
+     - 1 to Hillcrest
+
+  3. Fund Riverside dispatch programme         Remaining budget
+     - Target: halve Late Dispatch holds       (BDT 0–21,000 depending
+       from 312/week to <156/week                on one-time costs)
+
+TOTAL NEW HEADCOUNT: 2 (not 8)
+
+FINANCIAL SUMMARY (first month)
+
+  Budget spent:          BDT 70,000
+  Expected return:       ≥ BDT 176,885
+    of which:
+    - Revenue from 3,447 additional deliveries: BDT 236,885
+    - Less ongoing salary cost:                  BDT  39,000
+    - Less dispatch programme cost:             ≤ BDT  21,000
+  First-month ROI:       253% (base case) / 171% (conservative)
+
+  From month 2 onward (no one-time costs, dispatch fix in effect):
+    Monthly salary cost:    BDT 39,000
+    Monthly return:        ~BDT 200,000+
+    Marginal ROI:           >400%
+
+WHY THIS IS THE RIGHT USE OF BDT 70,000
+  - The budget cannot fund 8 hires (BDT 156,000 salary alone). Even
+    5 hires (BDT 97,500) exceeds the budget. This plan is not just
+    analytically superior — it is the only feasible plan that fills
+    every genuine gap.
+  - Transfers are the highest-ROI action available: 3 positions filled
+    at zero cost. Failing to transfer Lakeview's surplus agents while
+    spending BDT 70,000 to hire replacements elsewhere would be a
+    misallocation of company resources.
+  - The Riverside dispatch programme addresses the single largest source
+    of operational waste in the network: BDT 25,650/month in avoidable
+    re-attempts, plus the downstream cost of returns and delayed
+    deliveries. Ignoring this means the company will face the same
+    hiring request next quarter — and the quarter after that.
+  - The plan leaves every hub within the 70–85% healthy utilisation
+    range, with Brookside's spare agent as a company-wide buffer for
+    unexpected demand.
+
+IMMEDIATE NEXT STEPS
+  Week 1 (27 Oct – 2 Nov):
+    □ Confirm one-time hiring costs from the costs tab of cost_sheet.xlsx
+    □ Initiate transfer of 3 Lakeview Fixed agents
+    □ Post hiring for 2 Fixed agent positions (Hillcrest + Riverside)
+    □ Begin Riverside dispatch audit (map Late Dispatch root causes)
+
+  Week 2 (3–9 Nov):
+    □ New hires onboard, begin route familiarisation with buddy agents
+    □ Transferred agents report to Greenfield (2) and Hillcrest (1)
+    □ Riverside dispatch training delivered; daily Late Dispatch
+      tracking begins (target: <35 Late Dispatch events/day)
+
+  Week 3–4 (10–23 Nov):
+    □ Monitor utilisation across all hubs (target: 70–85%)
+    □ Track new agent ramp-up (target: >25 attempts/day by day 10)
+    □ Evaluate Riverside Late Dispatch trend (target: <156/week)
+    □ If Riverside dispatch fix succeeds and gap closes to 0 or -1,
+      flag the buffer agent for reassignment or contract review
+
+ASSUMPTIONS AND LIMITATIONS (summary)
+  1. One-time hiring costs are unknown (costs tab missing); budget
+     shown at three levels (BDT 5,000 / 10,000 / 15,500 per agent).
+  2. Revenue per delivery = BDT 65 (average delivery charge). True
+     margin may differ.
+  3. Dispatch improvement of 50% is an estimate, not a guarantee.
+  4. New agents are assumed to reach the planning target; conservative
+     scenario uses 80%.
+  5. Transfers are assumed feasible within Metro City.
+  6. Forecast volumes materialise as projected (based on 2 weeks of
+     data — inherently uncertain).

@@ -1,0 +1,7 @@
+hub_name,held_orders,delivered,returned,on_hold,delivered_pct,returned_pct,still_on_hold_pct
+Westwood,244,210,10,24,86.1,4.1,9.8
+Greenfield,303,269,8,26,88.8,2.6,8.6
+Lakeview,228,204,10,14,89.5,4.4,6.1
+Brookside,324,260,37,27,80.2,11.4,8.3
+Riverside,1184,903,165,116,76.3,13.9,9.8
+Hillcrest,316,272,15,29,86.1,4.7,9.2

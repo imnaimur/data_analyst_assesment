@@ -1,0 +1,146 @@
+Q2. HUB UTILISATION IN WEEK 1 AND WEEK 2 - EXPLANATION & STEP-BY-STEP GUIDE
+============================================================================
+
+Question
+--------
+Compare each hub's attempts and utilisation in Week 1 and Week 2, and flag
+the hubs above target in Week 2. State how you define utilisation.
+
+
+PART A - HOW TO THINK ABOUT THE QUESTION (before writing any SQL)
+==================================================================
+
+Step A1 - Define utilisation in plain words
+  Utilisation = how busy the agents were, compared with how much work
+  they can normally handle.
+    utilisation % = actual work / capacity x 100
+
+Step A2 - Find "actual work" (from the PDF case notes)
+  "Every Assigned event is one delivery attempt."
+  -> actual work = number of 'Assigned' events = attempts
+
+Step A3 - Find "capacity" (from the PDF case notes)
+  "The standard workload of an agent is 40 attempts a day."
+  "Hubs operate every calendar day ... count every active agent as
+   available every day."
+  -> capacity per week = agents x 7 days x 40 attempts
+  Example: 10 agents -> 10 x 7 x 40 = 2,800 attempts a week
+
+Step A4 - Find the target
+  "The planning target is 85% of the standard workload."
+  -> target = 85% utilisation (= 34 attempts per agent per day)
+  -> "above target" means utilisation > 85
+
+Step A5 - Watch out: agent numbers change between weeks
+  "Inactive agents left the company at the end of Week 1."
+  -> Week 1 agents = ALL agents (inactive ones were still working)
+  -> Week 2 agents = only Active agents
+  Greenfield and Westwood each lose 1 agent in Week 2.
+
+Step A6 - Find which tables have the pieces
+  order_logs -> Assigned events and their dates (attempts)
+  agents     -> agent's hub, and active_status (agent counts)
+  hubs       -> hub names
+
+Step A7 - Plan the query in small steps
+  1. attempts per hub, Week 1 and Week 2
+  2. agents per hub, Week 1 and Week 2
+  3. divide 1 by capacity from 2
+  4. add the flag
+
+
+DEFINITION TO WRITE IN YOUR PDF
+===============================
+  Utilisation = attempts / (agents x 7 days x 40 attempts) x 100
+  - attempts = 'Assigned' events in order_logs
+  - 40 attempts per agent per day = standard workload
+  - Target = 85%. A hub is "Above target" if Week 2 utilisation > 85%.
+
+
+PART B - ASSUMPTIONS
+====================
+1. Week 1 = 13-19 Oct 2026, Week 2 = 20-26 Oct 2026.
+2. An attempt belongs to the hub of the agent who made it
+   (order_logs has no hub column).
+3. Every agent on the roster is available all 7 days (per case notes),
+   even if they had no events on some day.
+4. Inactive agents count in Week 1 only (they left at the end of Week 1).
+   Checked: the inactive agents have no events in Week 2.
+
+
+PART C - HOW THE QUERY WORKS (step by step)
+===========================================
+
+Step 1 - attempts
+  Joins agents -> order_logs.
+  WHERE status = 'Assigned' keeps only attempts.
+  COUNT(*) FILTER (WHERE event_time in Week 1) -> w1_attempts
+  COUNT(*) FILTER (WHERE event_time in Week 2) -> w2_attempts
+  GROUP BY hub_id -> one row per hub, both weeks side by side.
+
+Step 2 - active_agents
+  From agents only, GROUP BY hub_id.
+  COUNT(*)                                     -> w1_agents (everyone)
+  COUNT(*) FILTER (WHERE active_status = 'Active') -> w2_agents
+
+Step 3 - utilisation
+  Joins attempts + active_agents + hubs on hub_id.
+  w1_attempts * 100.0 / (w1_agents * 7 * 40) -> w1_utl
+  w2_attempts * 100.0 / (w2_agents * 7 * 40) -> w2_utl
+  100.0 (not 100) forces decimal division; integer / integer would
+  drop the decimals and give 0.
+  ROUND(..., 1) -> 1 decimal place.
+
+Step 4 - final SELECT (the flag)
+  CASE WHEN w2_utl > 85 THEN 'Above target' ELSE 'Within target' END
+  The flag is in a separate step because SQL does not let you use the
+  alias w2_utl inside the same SELECT that creates it.
+
+
+PART D - CHECK IT BY HAND
+=========================
+Hillcrest, Week 2:
+  Agents   = 9 (all active)
+  Capacity = 9 x 7 x 40 = 2,520 attempts
+  Attempts = 2,416
+  Utilisation = 2,416 / 2,520 x 100 = 95.9%  -> > 85 -> Above target
+                                              (matches query)
+Greenfield, Week 1 vs Week 2:
+  Week 1: 11 agents -> 1,925 / (11 x 280) = 62.5%
+  Week 2: 10 agents -> 2,482 / (10 x 280) = 88.6%  (one agent left)
+
+Also checked: Week 1 + Week 2 attempts across all hubs
+  = 11,689 + 13,906 = 25,595 = every 'Assigned' row in order_logs.
+
+
+PART E - RESULT
+===============
+Hub        | W1 attempts | W1 util | W2 attempts | W2 util | Week 2 flag
+-----------+-------------+---------+-------------+---------+--------------
+Greenfield |       1,925 |  62.5%  |       2,482 |  88.6%  | Above target
+Lakeview   |       1,647 |  53.5%  |       1,730 |  56.2%  | Within target
+Riverside  |       2,281 |  67.9%  |       3,051 |  90.8%  | Above target
+Hillcrest  |       1,943 |  77.1%  |       2,416 |  95.9%  | Above target
+Brookside  |       2,023 |  65.7%  |       2,202 |  71.5%  | Within target
+Westwood   |       1,870 |  66.8%  |       2,025 |  80.4%  | Within target
+
+
+PART F - KEY FINDINGS
+=====================
+- Three hubs are above the 85% target in Week 2:
+  Hillcrest (95.9%), Riverside (90.8%), Greenfield (88.6%).
+- Greenfield had the biggest jump (+26.1 points). Part of it is the
+  volume rise, part is losing an inactive agent after Week 1.
+- Lakeview is only 56.2% utilised - almost half its capacity is unused.
+  Brookside (71.5%) also has room. These hubs are candidates to lend
+  agents rather than hire.
+- Westwood (80.4%) is close to the target - worth watching.
+- Riverside's high utilisation needs care: 28.2% of its attempts end in
+  a hold (Q1), and every hold is attempted again the next day. So part of
+  its "busy" is repeat work on the same orders, not new volume.
+
+
+PART G - SMALL THING TO NOTE IN THE SQL FILE (optional, not required)
+====================================================================
+- The final SELECT has no ORDER BY, so rows come out in hub_id order by
+  chance. Adding "ORDER BY w2_utl DESC" would put the busiest hub first.

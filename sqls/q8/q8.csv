@@ -1,0 +1,7 @@
+hub_name,active_agents,required_agents,staffing_gap,status,peak_orders,peak_attempts,attempts_per_order,hire_cost_4wk_bdt,idle_cost_4wk_bdt
+Greenfield,10,12,2,Short,2570,2758,1.073,36400,0
+Lakeview,11,8,-3,Surplus,1606,1723,1.073,0,54600
+Riverside,12,13,1,Short,2245,3033,1.351,18200,0
+Hillcrest,9,11,2,Short,2356,2539,1.078,36400,0
+Brookside,11,10,-1,Surplus,2035,2207,1.085,0,18200
+Westwood,9,9,0,Balanced,1928,2058,1.067,0,0

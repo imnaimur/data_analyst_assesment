@@ -1,0 +1,109 @@
+Q3. HOLD REASONS - EXPLANATION
+==============================
+
+Question
+--------
+For Week 2, find each hub's total holds, the share that are agent-side,
+and its top two hold reasons.
+
+
+Assumptions
+-----------
+1. Week 2 = 20 to 26 October 2026.
+2. A hold = one row in order_logs with status = 'Hold'.
+   An order held on two different days counts as two holds.
+3. Agent-side reasons (from the case notes):
+   Late Dispatch, Not Attempted, Agent Time Shortage.
+   All other reasons (Customer Unreachable, Customer Rescheduled,
+   Address Incomplete) are customer-side.
+4. "Top two hold reasons" is read as the top two AGENT-SIDE reasons,
+   because those are the ones the hub can fix itself.
+5. A hold belongs to the hub of the agent who made the attempt
+   (order_logs has no hub column, so the hub comes from the agents table).
+6. If two reasons have the same count, both are shown together
+   (e.g. "Agent Time Shortage (16) / Not Attempted (16)") instead of
+   picking one at random.
+
+
+How the query works
+-------------------
+The query is built in small steps using WITH (CTEs). Each step does one job
+and the next step uses its result.
+
+Step 1 - hub_reasons
+  Joins hubs -> agents -> order_logs to get each hold's hub.
+  WHERE keeps only Hold rows in Week 2.
+  GROUP BY hub_name, hold_reason counts holds per hub per reason.
+  Result: one row per hub + reason, e.g. "Riverside | Late Dispatch | 312".
+
+Step 2 - hub_totals
+  Collapses step 1 to one row per hub.
+  SUM(holds)                      -> total holds
+  SUM(holds) FILTER (WHERE reason
+    IN (agent-side reasons))      -> agent-side holds
+
+Step 3 - ranked_reasons
+  Keeps only agent-side reasons and ranks them inside each hub:
+    RANK() OVER (PARTITION BY hub_name ORDER BY holds DESC)
+  PARTITION BY hub_name -> numbering restarts for every hub
+  ORDER BY holds DESC   -> biggest count gets rank 1
+  RANK (not ROW_NUMBER) is used so tied reasons get the same rank
+  (1, 2, 2) and neither is dropped.
+
+Step 4 - top_reasons
+  Turns the ranked rows into one row per hub with two columns.
+  STRING_AGG(..., ' / ') joins tied reasons into one cell.
+  FILTER (WHERE reason_rank = 1) -> top_reason_1
+  FILTER (WHERE reason_rank = 2) -> top_reason_2
+  hold_reason || ' (' || holds || ')' builds labels like "Late Dispatch (312)".
+
+Final SELECT
+  Joins hub_totals with top_reasons on hub_name and calculates:
+    agent_side_pct = agent_side_holds * 100.0 / total_holds
+  100.0 (not 100) forces decimal division; integer / integer would
+  drop the decimals.
+
+
+Result
+------
+Hub        | Total | Agent-side | Agent % | Top reason 1             | Top reason 2
+-----------+-------+------------+---------+--------------------------+----------------------------------------------
+Riverside  |   874 |        563 |   64.4% | Late Dispatch (312)      | Not Attempted (132)
+Brookside  |   186 |         49 |   26.3% | Late Dispatch (17)       | Agent Time Shortage (16) / Not Attempted (16)
+Hillcrest  |   182 |         40 |   22.0% | Late Dispatch (20)       | Agent Time Shortage (10) / Not Attempted (10)
+Greenfield |   168 |         32 |   19.0% | Agent Time Shortage (13) | Not Attempted (11)
+Westwood   |   146 |         30 |   20.5% | Agent Time Shortage (13) | Late Dispatch (10)
+Lakeview   |   123 |         26 |   21.1% | Agent Time Shortage (10) | Not Attempted (9)
+
+Check: total holds across all hubs = 1,679, matching all Week 2 Hold rows.
+
+
+Key findings
+------------
+Week 2 produced 1,679 holds across the six hubs, and more than half of
+them came from one place: Riverside, with 874. No other hub reached 200.
+
+What sets Riverside apart is who caused them. At the other hubs, at
+least three in four holds start with the customer: they couldn't be reached,
+asked for another day, or gave an incomplete address. At Riverside it's
+the reverse. 64% of its holds were agent-side. Late Dispatch alone caused
+312, more than the total holds at any other hub, and Not Attempted added
+another 132. Riverside accounts for 563 of the network's 740 agent-side
+holds (76%).
+
+This explains what showed up earlier. In Q1, more than one in four
+Riverside attempts ended in a hold, and in Q2 the hub ran at 91% of its
+standard workload. The two are linked: every held order comes back for
+another attempt the next day, so part of Riverside's heavy workload is
+repeat work it created itself.
+
+The other five hubs look much alike. Agent-side holds are 19-26% of
+their total, and each agent-side reason accounts for only 7 to 20 holds
+over the whole week. Late Dispatch tops the agent-side list at Brookside
+and Hillcrest; Agent Time Shortage tops it at Greenfield, Westwood and
+Lakeview. At these small numbers the ranking is a hint, not a pattern,
+and at Brookside and Hillcrest second place is a tie.
+
+So Riverside's hold problem is about how its orders get dispatched, not
+about how many agents it has. Fixing that would cut its holds, free up
+attempts, and lighten its workload before any agent is added.

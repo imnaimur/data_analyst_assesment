@@ -1,0 +1,77 @@
+Q4. WHAT HAPPENS TO HELD ORDERS - EXPLANATION
+=============================================
+
+Question
+--------
+For orders held at least once, find the share that were finally delivered,
+returned or are still on hold, by hub.
+
+
+Tables used
+-----------
+order_logs -> tells us WHICH orders were held (any row with status = 'Hold')
+orders     -> tells us the FINAL outcome (final_status) and the hub (hub_id)
+hubs       -> hub names
+
+
+Assumptions
+-----------
+1. "Held at least once" = the order has at least one 'Hold' row in order_logs.
+   An order held twice is counted once (2,599 held orders in total;
+   443 of them were held twice, none three times).
+2. The final outcome is taken from orders.final_status.
+   Checked: it matches the last outcome in order_logs for all 22,789 orders.
+3. "Still on hold" = final_status = 'Hold'. These 236 orders were last held
+   on 25-26 October, so the period ended before their next attempt.
+4. The hub is orders.hub_id. Every agent who handled an order belongs to the
+   order's hub (0 mismatches), so using the agent's hub gives the same answer.
+5. Shares are % of each hub's held orders, so the three shares add up to 100%.
+
+
+How the query works
+-------------------
+Step 1 - held_orders
+  SELECT DISTINCT order_id FROM order_logs WHERE status = 'Hold'
+  Gives one row per order that was held at least once.
+  DISTINCT matters: an order held twice has two Hold rows, and without
+  DISTINCT it would be counted twice.
+
+Step 2 - hub_outcomes
+  Joins held_orders -> orders -> hubs.
+  Joining to held_orders also works as a filter: orders that were never
+  held are dropped.
+  COUNT(*)                                   -> held orders per hub
+  COUNT(*) FILTER (WHERE final_status = ...) -> delivered / returned /
+                                                still on hold
+
+Final SELECT
+  share = count * 100.0 / held_orders, rounded to 1 decimal.
+  100.0 (not 100) forces decimal division; integer / integer would
+  drop the decimals.
+  Sorted by delivered_pct (worst hub first).
+
+
+Result
+------
+Hub        | Held | Delivered     | Returned     | Still on hold
+-----------+------+---------------+--------------+--------------
+Riverside  | 1184 |  903 (76.3%)  | 165 (13.9%)  | 116 (9.8%)
+Brookside  |  324 |  260 (80.2%)  |  37 (11.4%)  |  27 (8.3%)
+Westwood   |  244 |  210 (86.1%)  |  10 (4.1%)   |  24 (9.8%)
+Hillcrest  |  316 |  272 (86.1%)  |  15 (4.7%)   |  29 (9.2%)
+Greenfield |  303 |  269 (88.8%)  |   8 (2.6%)   |  26 (8.6%)
+Lakeview   |  228 |  204 (89.5%)  |  10 (4.4%)   |  14 (6.1%)
+
+Check: held orders across all hubs = 2,599, matching the distinct held
+orders in order_logs.
+
+
+Key findings
+------------
+- Most held orders are rescued: 76-90% are finally delivered in every hub.
+- Riverside is the weak spot: it has 1,184 of the 2,599 held orders (46%)
+  and the lowest recovery (76.3% delivered, 13.9% returned).
+  This links to Q3, where 64.4% of Riverside's holds were agent-side,
+  mainly Late Dispatch.
+- Brookside has the second-highest return share (11.4%).
+- The other four hubs return less than 5% of their held orders.

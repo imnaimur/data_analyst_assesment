@@ -1,0 +1,7 @@
+hub_id,hub_name,w1_attempts,w1_utl,w2_attempts,w2_utl,w2_flag
+H01,Greenfield,1925,62.5,2482,88.6,Above target
+H02,Lakeview,1647,53.5,1730,56.2,Within target
+H03,Riverside,2281,67.9,3051,90.8,Above target
+H04,Hillcrest,1943,77.1,2416,95.9,Above target
+H05,Brookside,2023,65.7,2202,71.5,Within target
+H06,Westwood,1870,66.8,2025,80.4,Within target

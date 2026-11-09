@@ -1,0 +1,220 @@
+Q1. DAILY AGENT PRODUCTIVITY - EXPLANATION & STEP-BY-STEP GUIDE
+================================================================
+
+Question
+--------
+Build a daily table of each agent's assigned, delivered, hold and returned
+attempts, and show each hub's average deliveries per agent per day.
+In your PDF, show the first 20 rows of the daily table and the full hub
+summary.
+
+The question has TWO outputs:
+  Part 1 - a daily table: one row per agent per day
+  Part 2 - a hub summary: one row per hub
+
+
+PART A - HOW TO THINK ABOUT THE QUESTION (before writing any SQL)
+==================================================================
+
+Step A1 - Decide what one row means
+  "daily table of each agent" -> one row = one agent on one day.
+  So we GROUP BY agent + date.
+
+Step A2 - Find which tables have the pieces
+  order_logs -> every status event (Assigned / Delivered / Hold / Returned),
+                with agent_id and event_time
+  agents     -> agent name and the agent's hub_id
+  hubs       -> hub name
+  order_logs has NO hub column, so the path to the hub is:
+    order_logs -> agents (agent_id) -> hubs (hub_id)
+
+Step A3 - Understand what to count (from the PDF case notes)
+  "Every Assigned event is one delivery attempt, followed by one outcome:
+   Delivered, Hold or Returned."
+  So for each agent-day we count 4 things:
+    assigned  = rows with status 'Assigned'   (= attempts)
+    delivered = rows with status 'Delivered'
+    hold      = rows with status 'Hold'
+    returned  = rows with status 'Returned'
+  Tool for this: COUNT(*) FILTER (WHERE status = '...')
+  It counts only the rows matching the condition, so four different
+  counts come out of the same group of rows.
+
+Step A4 - Part 2: think in two levels
+  "average deliveries per agent per day" means:
+    first  -> deliveries for each agent on each day   (agent-day level)
+    then   -> average those numbers inside each hub   (hub level)
+  You cannot do this in one GROUP BY. Build the agent-day rows first
+  (in a CTE), then GROUP BY hub and take AVG.
+
+
+PART B - ASSUMPTIONS
+====================
+
+Part 1 - daily table
+  1. One row = one agent on one calendar day (date part of event_time).
+  2. Only days on which the agent has at least one event appear in the
+     table. Days with no activity (day off, absence) produce no row,
+     not a row of zeros. Result: 854 agent-day rows, not 64 x 14 = 896.
+  3. An agent's hub = agents.hub_id (order_logs has no hub column).
+     Checked: every agent only handles orders of their own hub.
+  4. Each count is a count of EVENTS, not distinct orders. If the same
+     order is attempted on two days, it appears on both days.
+  5. Inactive agents are included for the days they worked (Week 1 only;
+     they left at the end of Week 1).
+  6. "First 20 rows" = sorted by date, then agent_id. With this sort the
+     first 20 rows are all from 13 Oct (agents A1001-A1020).
+
+Part 2 - hub summary
+  7. Average = total deliveries / number of worked agent-days in the hub
+     (AVG over the Part 1 style rows). Days an agent did not work are
+     NOT counted as 0.
+  8. All 14 days (13-26 Oct) are combined into one average.
+
+
+PART C - HOW THE QUERY WORKS (step by step)
+===========================================
+
+PART 1 - daily table (CTE: agent_perforrmance)
+  FROM agents -> INNER JOIN order_logs -> INNER JOIN hubs
+  GROUP BY agent_id, agent_name, hub_name, DATE(event_time)
+    -> one row per agent per day
+  4 x COUNT(*) FILTER (...) -> assigned, delivered, hold, returned
+  Final SELECT:
+    ORDER BY event_date, agent_id -> earliest day first, then by agent
+    LIMIT 20                      -> only the first 20 rows (as the
+                                     question asks for the PDF)
+
+PART 2 - hub summary (CTE: deliveries)
+  Step 1 (CTE): agents -> order_logs
+    GROUP BY hub_id, agent_id, date
+    COUNT(*) FILTER (WHERE status = 'Delivered') -> total_delivered
+    = deliveries per agent per day
+  Step 2 (final SELECT): join hubs for names
+    GROUP BY hub_name
+    AVG(total_delivered) -> average deliveries per agent per day
+    ROUND(..., 2)        -> 2 decimal places
+  The \copy at the end runs the same query and saves it to
+  q1_part2.csv (psql only).
+
+
+PART D - CHECK IT BY HAND
+=========================
+Check 1 - every attempt has exactly one outcome:
+  For all 854 agent-days, assigned = delivered + hold + returned.
+  Example: A1003 on 13 Oct -> 27 = 22 + 3 + 2  (correct)
+
+Check 2 - nothing is lost in the daily table:
+  Sum over all 854 rows: assigned 25,595 | delivered 21,078 |
+  hold 3,042 | returned 1,475 -> equals every row of order_logs
+  by status.
+
+Check 3 - Part 2 average:
+  Greenfield: 3,908 deliveries / 144 worked agent-days = 27.14  (matches)
+  Hillcrest : 3,798 deliveries / 123 worked agent-days = 30.88  (matches)
+
+
+PART E - RESULT
+===============
+Part 1 - first 20 rows of the daily table
+agent | name             | hub        | date       | assigned | delivered | hold | returned
+------+------------------+------------+------------+----------+-----------+------+---------
+A1001 | Weno Tremaine    | Greenfield | 2026-10-13 |       20 |        18 |    2 |        0
+A1002 | Valel Wexley     | Greenfield | 2026-10-13 |       21 |        17 |    4 |        0
+A1003 | Torian Vantell   | Greenfield | 2026-10-13 |       27 |        22 |    3 |        2
+A1004 | Garian Larkin    | Greenfield | 2026-10-13 |       20 |        19 |    1 |        0
+A1005 | Wenan Brannick   | Greenfield | 2026-10-13 |       23 |        20 |    2 |        1
+A1006 | Toren Rowntree   | Greenfield | 2026-10-13 |       26 |        23 |    2 |        1
+A1007 | Coris Rowntree   | Greenfield | 2026-10-13 |       27 |        25 |    0 |        2
+A1008 | Garon Holloway   | Greenfield | 2026-10-13 |       26 |        22 |    3 |        1
+A1009 | Perian Halvorsen | Greenfield | 2026-10-13 |       34 |        27 |    6 |        1
+A1010 | Joris Fenwick    | Greenfield | 2026-10-13 |       28 |        23 |    2 |        3
+A1011 | Marel Fenwick    | Greenfield | 2026-10-13 |       14 |        12 |    1 |        1
+A1012 | Zarik Rowntree   | Lakeview   | 2026-10-13 |       19 |        18 |    1 |        0
+A1013 | Pero Ketteridge  | Lakeview   | 2026-10-13 |       25 |        22 |    2 |        1
+A1014 | Zaris Quorne     | Lakeview   | 2026-10-13 |       26 |        23 |    2 |        1
+A1015 | Toren Larkin     | Lakeview   | 2026-10-13 |       24 |        21 |    3 |        0
+A1016 | Noren Vantell    | Lakeview   | 2026-10-13 |       17 |        15 |    0 |        2
+A1017 | Joran Pelham     | Lakeview   | 2026-10-13 |       23 |        23 |    0 |        0
+A1018 | Lorus Brannick   | Lakeview   | 2026-10-13 |       14 |        13 |    1 |        0
+A1019 | Selus Rowntree   | Lakeview   | 2026-10-13 |       19 |        17 |    2 |        0
+A1020 | Noris Fenwick    | Lakeview   | 2026-10-13 |       15 |        14 |    1 |        0
+
+Part 2 - hub summary (average deliveries per agent per day)
+Hub        | Avg deliveries / agent / day
+-----------+-----------------------------
+Hillcrest  | 30.88
+Westwood   | 27.63
+Greenfield | 27.14
+Brookside  | 23.20
+Riverside  | 21.08
+Lakeview   | 20.14
+
+
+PART F - ANALYSIS
+=================
+
+Part 1 - what the daily table shows
+-----------------------------------
+Size of the table
+  - 854 rows: 64 agents over 14 days (13-26 Oct).
+  - On a normal day 58-64 agents work. 23 agents miss at least one day
+    (including the 2 inactive agents, who stop after 19 Oct).
+
+What a typical agent-day looks like
+  - Average 30.0 attempts per agent-day (lowest 13, highest 61).
+  - 82.4% of all attempts end in delivery, 11.9% in hold, 5.8% in return.
+
+Week 1 vs Week 2 (company-wide, per agent-day)
+  Date range      | Attempts / day (all agents) | Avg attempts | Avg deliveries
+  13-19 Oct (W1)  | 1,509 - 1,714               | 25.2 - 28.6  | 20.7 - 23.7
+  20-26 Oct (W2)  | 1,954 - 2,022               | 32.1 - 34.9  | 26.2 - 28.4
+  - The jump happens on 20 Oct and stays for the whole of Week 2: daily
+    attempts rise from ~1,670 to ~1,987 (+19%) with roughly the same number of
+    agents working. So the extra volume was absorbed by each agent doing
+    more, not by more agents.
+  - 85 agent-days are above 40 attempts (the standard daily workload
+    in the case notes), so some agents are already being stretched.
+
+Outcome mix differs a lot by hub (share of attempts)
+  Hub        | Delivered | Hold
+  Westwood   |   89.4%   |  6.9%
+  Lakeview   |   88.9%   |  7.2%
+  Greenfield |   88.7%   |  7.4%
+  Hillcrest  |   87.1%   |  7.9%
+  Brookside  |   80.7%   |  8.4%   (low delivered share, holds normal
+                                    -> more returns)
+  Riverside  |   65.2%   | 28.2%   (more than 1 in 4 attempts is a hold)
+
+From the first 20 rows (13 Oct)
+  - Agents handled 14-34 attempts each on the first day, all below 40.
+  - A1011 (Greenfield) did the fewest attempts in the sample (14);
+    A1011 is one of the inactive agents who left after Week 1.
+
+Part 2 - what the hub summary shows
+-----------------------------------
+  - Hillcrest agents deliver the most per day (30.88), Lakeview the
+    least (20.14): a 10-delivery gap per agent per day between hubs.
+  - Change from Week 1 to Week 2 (avg deliveries per agent-day):
+      Greenfield 22.6 -> 32.0  (+9.4)
+      Hillcrest  27.2 -> 34.6  (+7.4)
+      Riverside  18.0 -> 24.2  (+6.2)
+      Westwood   25.2 -> 30.4  (+5.2)
+      Brookside  22.7 -> 23.7  (+1.0)
+      Lakeview   19.9 -> 20.4  (+0.5)
+    The Week 2 volume rise hit Greenfield, Hillcrest, Riverside and
+    Westwood. Brookside and Lakeview stayed almost flat.
+  - Riverside is second-lowest (21.08) because so many of its attempts
+    end in hold instead of delivery (28.2%, see Part 1).
+  - Lakeview is lowest because its volume per agent is low, not because
+    of failed attempts (its delivered share is 88.9%).
+
+
+PART G - SMALL THINGS TO NOTE IN THE SQL FILE (optional, not required)
+=====================================================================
+- Part 2's query has no semicolon after "GROUP BY h.hub_name". It works
+  when you run just that block in your editor, but if you run the whole
+  file with psql it will merge with the \copy line. Adding ";" fixes it.
+- Part 2 has no ORDER BY, so hubs come out in a random order. Adding
+  "ORDER BY daily_del_perAgnt DESC" makes the table easier to read.
+- The CTE name "agent_perforrmance" has a double "r" (harmless typo).

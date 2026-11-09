@@ -1,0 +1,647 @@
+Q8. THE HIRING REQUEST — STRATEGIC ASSESSMENT
+===============================================
+
+Question
+--------
+Hub managers have asked for 8 new agents to handle the forecast.
+Would you approve the request? Make your case hub by hub, with costs.
+
+
+===============================================================================
+1. OVERALL ASSESSMENT
+===============================================================================
+
+Decision: PARTIALLY APPROVE — hire 2 agents, not 8.
+
+The hiring request overstates the company's actual need by a factor of
+four. The data tells a clear story:
+
+  Company-wide active agents:    62
+  Company-wide peak requirement: 63  (from Q7, worst forecast week)
+  Net gap:                       +1
+
+The request for 8 new agents treats every hub as if it must solve its
+own staffing problem in isolation. In reality, the six hubs form a
+connected network within Metro City. Two hubs (Lakeview and Brookside)
+have significant surplus capacity, while three (Greenfield, Hillcrest,
+Riverside) are genuinely short. The sixth (Westwood) is balanced.
+
+The critical distinction this analysis makes is between:
+
+  (a) CAPACITY shortages — hubs that genuinely do not have enough agents
+      for the forecasted volume (Greenfield, Hillcrest). These need
+      agents, whether hired or transferred.
+
+  (b) OPERATIONAL inefficiencies masquerading as capacity problems —
+      Riverside, where 64.4% of holds are agent-side (Q3) and each
+      order requires 1.351 attempts instead of the ~1.075 company
+      average. Riverside's apparent staffing gap of +1 would become a
+      surplus of -1 if its dispatch operations were fixed.
+
+Approving all 8 hires would cost BDT 156,000 per month in salary alone,
+add agents to hubs that already have too many, and leave Riverside's
+underlying dispatch problem untouched.
+
+The recommended plan — transfer 3 existing agents from surplus hubs and
+hire 2 — fills every gap at BDT 39,000 per month, saving BDT 117,000
+per month (75%) compared to the full request.
+
+
+===============================================================================
+2. HUB-BY-HUB ASSESSMENT
+===============================================================================
+
+--------------------------------------------------------------------------------
+GREENFIELD (H01) — SHORT BY 2 AGENTS → TRANSFER 2
+--------------------------------------------------------------------------------
+
+Utilisation:
+  Week 1: 62.5% (11 agents, including 1 inactive)
+  Week 2: 88.6% (10 active agents) — ABOVE the 85% target (Q2)
+  The jump is caused by two factors: a ~29% volume rise from Week 1 to
+  Week 2 (1,925 → 2,482 attempts) and the loss of 1 inactive agent.
+
+Forecast demand (Q7):
+  Peak week (10–16 Nov): 2,570 orders × 1.073 attempts/order = 2,758 attempts
+  Required agents: CEIL(2,758 / 238) = 12
+  Current active: 10
+  Gap: +2 agents, consistent across all four forecast weeks
+
+Delivery workload:
+  Week 2 average: 32.0 deliveries per agent per day — the 2nd highest
+  in the company. Agents are working hard but within reason (attempts
+  per day averaged ~35, below the 40-attempt standard workload).
+
+Hold rates:
+  168 total holds in Week 2, of which 32 (19.0%) were agent-side (Q3).
+  This is the lowest agent-side share in the network. Greenfield's
+  holds are overwhelmingly customer-driven, not an operational problem.
+
+Agent mix: 6 Fixed + 4 Variable.
+
+Assessment: Greenfield has a genuine capacity shortage. Its high
+  utilisation is driven by real volume growth, not repeat attempts.
+  With a low agent-side hold rate and one of the highest delivery
+  rates per agent, this hub is operationally healthy — it simply
+  needs more hands.
+
+Recommendation: RECEIVE 2 AGENTS via transfer from Lakeview.
+  No new hire needed. Incremental cost: BDT 0.
+
+--------------------------------------------------------------------------------
+LAKEVIEW (H02) — SURPLUS OF 3 AGENTS → TRANSFER 3 OUT
+--------------------------------------------------------------------------------
+
+Utilisation:
+  Week 1: 53.5%
+  Week 2: 56.2% — the LOWEST in the company, 29 points below the 85%
+  target (Q2). Nearly half of Lakeview's agent capacity sits idle.
+
+Forecast demand (Q7):
+  Peak week (10–16 Nov): 1,606 orders × 1.073 attempts/order = 1,723 attempts
+  Required agents: CEIL(1,723 / 238) = 8
+  Current active: 11
+  Gap: -3 agents surplus, in every forecast week
+
+Delivery workload:
+  Week 2 average: 20.4 deliveries per agent per day — the lowest in
+  the company (Q1). This is not because agents are unproductive; it is
+  because volume per agent is low. Lakeview's delivery success rate is
+  88.9% (Q1), among the best.
+
+Hold rates:
+  123 total holds in Week 2 (the fewest), 26 agent-side (21.1%) (Q3).
+  Unremarkable — no operational problems.
+
+Cost efficiency:
+  Week 2 cost per delivery: BDT 31.06 — the HIGHEST in the company
+  (Q6). This is a direct consequence of overstaffing: the same number
+  of Fixed agents spread over fewer deliveries.
+
+Agent mix: 8 Fixed + 3 Variable.
+
+Assessment: Lakeview is the clearest case of surplus capacity. It will
+  remain overstaffed throughout the forecast even after donating 3
+  agents. There is no operational reason to add agents here; doing so
+  would worsen its already-high cost per delivery.
+
+  The 3 surplus agents cost BDT ~58,500 per month in salary
+  (3 Fixed × 650 × 30 days). Leaving them idle at Lakeview while
+  hiring new agents for other hubs is economically indefensible.
+
+Recommendation: TRANSFER 3 FIXED AGENTS to Greenfield (2) and
+  Hillcrest (1). Post-transfer: 5 Fixed + 3 Variable = 8 agents,
+  matching the peak requirement exactly.
+
+  Lakeview's cost per delivery will improve as the same overhead is
+  spread over a smaller, right-sized workforce (the remaining Variable
+  agents handle the volume more cost-efficiently).
+
+--------------------------------------------------------------------------------
+HILLCREST (H04) — SHORT BY 2 AGENTS → TRANSFER 1, HIRE 1
+--------------------------------------------------------------------------------
+
+Utilisation:
+  Week 1: 77.1%
+  Week 2: 95.9% — the HIGHEST in the company, 11 points above target (Q2).
+  Hillcrest agents are the most stretched in the network.
+
+Forecast demand (Q7):
+  Peak week (10–16 Nov): 2,356 orders × 1.078 attempts/order = 2,539 attempts
+  Required agents: CEIL(2,539 / 238) = 11
+  Current active: 9
+  Gap: +2 agents, consistent across all four forecast weeks
+
+Delivery workload:
+  Week 2 average: 34.6 deliveries per agent per day — the highest in
+  the company (Q1). Agents are already working at the planning target.
+  Any additional volume without additional agents pushes above the
+  standard 40-attempt ceiling.
+
+Hold rates:
+  182 total holds, 40 agent-side (22.0%) (Q3). This is moderate and
+  within the 19–26% range seen at non-Riverside hubs. Top agent-side
+  reason: Late Dispatch (20). Not a material operational problem.
+
+Agent mix: 2 Fixed + 7 Variable.
+
+Assessment: Hillcrest has the most urgent genuine capacity shortage.
+  At 95.9% utilisation in Week 2, its agents are already near the limit.
+  The forecast projects similar or higher volumes for all four weeks.
+  Without additional agents, Hillcrest will exceed the 40-attempt
+  standard workload, leading to agent fatigue, rising hold rates,
+  and deteriorating service quality.
+
+Recommendation: RECEIVE 1 FIXED AGENT from Lakeview + HIRE 1 NEW AGENT.
+  The Lakeview transfer covers the first gap position. The second must
+  be a new hire because no other hub has a spare agent that can be
+  transferred without creating a new shortage.
+
+  Hire type: Fixed. At Hillcrest's workload of ~35 deliveries/day,
+  a Fixed agent costs BDT 650/day vs Variable at BDT 790/day
+  (300 + 14 × 35). Fixed is 18% cheaper.
+
+  Monthly cost of the new hire: BDT 19,500 (650 × 30 days).
+
+--------------------------------------------------------------------------------
+RIVERSIDE (H03) — GAP OF +1 ON PAPER, BUT ROOT CAUSE IS OPERATIONAL
+                 → HIRE 1 BUFFER AGENT + FIX DISPATCH
+--------------------------------------------------------------------------------
+
+Utilisation:
+  Week 1: 67.9%
+  Week 2: 90.8% — above the 85% target (Q2)
+  However, this figure is misleading. A large share of Riverside's
+  "work" is repeat attempts on orders that should have been delivered
+  the first time.
+
+Forecast demand (Q7):
+  Peak week (10–16 Nov): 2,245 orders × 1.351 attempts/order = 3,033 attempts
+  Required agents: CEIL(3,033 / 238) = 13
+  Current active: 12
+  Gap: +1
+
+  BUT: if Riverside's attempts-per-order were at the company average
+  (1.075 instead of 1.351):
+    2,245 × 1.075 = 2,413 attempts → CEIL(2,413 / 238) = 11 agents
+    Gap would be: 11 - 12 = -1 (SURPLUS, not shortage)
+
+  This means Riverside's entire +1 staffing gap — and more — is caused
+  by operational inefficiency, not by volume.
+
+Delivery workload:
+  Week 2 average: 24.2 deliveries per agent per day — the 2nd lowest
+  in the company (Q1). Despite being "busy" (90.8% utilisation),
+  Riverside agents deliver fewer orders per day than agents at
+  Greenfield or Hillcrest who are equally busy. The difference is
+  wasted re-attempts.
+
+Hold rates — THE KEY ISSUE:
+  874 total holds in Week 2 — more than all other 5 hubs combined
+  (805 total). Of those, 563 (64.4%) were agent-side (Q3).
+
+  Breakdown of agent-side holds at Riverside (Q3):
+    Late Dispatch:        312 cases  (55.4% of agent-side holds)
+    Not Attempted:        132 cases  (23.4%)
+    Agent Time Shortage:  119 cases  (21.1%)
+
+  For context, the next-worst hub (Brookside) had only 49 agent-side
+  holds total in Week 2. Riverside's 563 is 11.5× worse.
+
+  These 563 agent-side holds directly caused 563 additional re-attempts
+  (each hold is retried the next day). That is 563 / 3,051 = 18.4%
+  of Riverside's total Week 2 attempts spent on AVOIDABLE retries.
+
+Impact on costs:
+  Week 2 cost per delivery: BDT 27.00 — the 2nd highest (Q6).
+  Riverside has 12 agents (more than Greenfield or Hillcrest) but
+  delivers fewer orders per agent because so much capacity is consumed
+  by repeat attempts on held orders.
+
+Held order outcomes (Q4):
+  Of Riverside's 1,184 held orders, only 76.3% were eventually
+  delivered (lowest), 13.9% were returned (highest), and 9.8% remain
+  on hold. Compare with Greenfield: 88.8% delivered, 2.6% returned.
+  Riverside's hold problem does not just waste agent time — it also
+  produces the worst customer outcomes.
+
+Agent mix: 8 Fixed + 4 Variable.
+
+Assessment: Riverside does NOT have a capacity problem. It has a
+  DISPATCH problem. Hiring an agent without fixing dispatch is treating
+  the symptom: the new agent's capacity will be partly consumed by the
+  same avoidable re-attempts, and the hub will ask for yet another
+  agent next quarter.
+
+  The evidence is unambiguous:
+  - 312 Late Dispatch events per week = orders not getting out of the
+    hub on time, forcing a re-attempt the next day.
+  - 132 Not Attempted events = orders assigned to agents but never
+    attempted at all.
+  - These are process failures, not volume problems.
+
+Recommendation: HIRE 1 FIXED AGENT as a short-term buffer while the
+  dispatch problem is addressed. This agent absorbs the gap for the
+  first 2–4 weeks while operational changes take effect.
+
+  Simultaneously, launch a Riverside dispatch improvement programme
+  (costed separately in Q9). Target: reduce Late Dispatch from
+  312/week to <50/week within 2–4 weeks.
+
+  If the dispatch fix succeeds, Riverside moves from needing 13 agents
+  to needing 11 — a surplus of 2. The buffer agent can then be
+  reassigned to provide cover elsewhere, or the position can be allowed
+  to lapse if hired on a Variable contract.
+
+  Monthly cost of the buffer hire: BDT 19,500 (Fixed).
+
+--------------------------------------------------------------------------------
+WESTWOOD (H06) — BALANCED → NO ACTION
+--------------------------------------------------------------------------------
+
+Utilisation:
+  Week 1: 66.8%
+  Week 2: 80.4% — within the 85% target (Q2), with 4.6 points of
+  headroom.
+
+Forecast demand (Q7):
+  Peak week (10–16 Nov): 1,928 orders × 1.067 attempts/order = 2,058 attempts
+  Required agents: CEIL(2,058 / 238) = 9
+  Current active: 9
+  Gap: 0 in every forecast week
+
+Delivery workload:
+  Week 2 average: 30.4 deliveries per agent per day — healthy,
+  in the middle of the company range (Q1).
+
+Hold rates:
+  146 total holds, 30 agent-side (20.5%) (Q3). Unremarkable.
+
+Agent mix: 7 Fixed + 2 Variable.
+
+Assessment: Westwood is correctly staffed for the forecast. No action
+  is needed. The 4.6 points of utilisation headroom below target
+  provide a comfortable buffer for daily variability.
+
+Recommendation: NO HIRE, NO TRANSFER. Monitor utilisation weekly.
+
+--------------------------------------------------------------------------------
+BROOKSIDE (H05) — SURPLUS OF 1 → HOLD AS COMPANY BUFFER
+--------------------------------------------------------------------------------
+
+Utilisation:
+  Week 1: 65.7%
+  Week 2: 71.5% — within target, 13.5 points below 85% (Q2).
+
+Forecast demand (Q7):
+  Peak week (10–16 Nov): 2,035 orders × 1.085 attempts/order = 2,207 attempts
+  Required agents: CEIL(2,207 / 238) = 10
+  Current active: 11
+  Gap: -1 in every forecast week
+
+Delivery workload:
+  Week 2 average: 23.7 deliveries per agent per day — below company
+  average. Agents have capacity to spare (Q1).
+
+Hold rates:
+  186 total holds, 49 agent-side (26.3%) (Q3). The second highest
+  agent-side share after Riverside, but the absolute numbers are small.
+
+Agent-level concern (Q5):
+  Brookside has the only 3 agents flagged for high return ratios:
+    A1045: 26.9% return ratio (349 attempts, 94 returned)
+    A1046: 22.0% return ratio (414 attempts, 91 returned)
+    A1047: 17.4% return ratio (413 attempts, 72 returned)
+  All have >1 year tenure, so this is not a ramp-up issue. These agents
+  effectively reduce Brookside's delivery capacity — the hub has 11
+  agents but a fraction of their output is returned, not delivered.
+
+Agent mix: 4 Fixed + 7 Variable.
+
+Assessment: Brookside has a modest surplus and should NOT receive or
+  lose agents. The 1-agent buffer is valuable as a company-wide reserve
+  — if any other hub encounters an unexpected shortfall, Brookside can
+  lend 1 agent without falling below its own requirement.
+
+  The high-return agents (Q5) should be investigated separately. If
+  their return rates improve, Brookside's effective capacity increases
+  further.
+
+Recommendation: NO HIRE, NO TRANSFER. Keep the 1-agent surplus as a
+  network buffer. Address the Q5 performance issue through coaching or
+  route reassignment, not through hiring additional agents.
+
+
+===============================================================================
+3. COST ANALYSIS
+===============================================================================
+
+MONTHLY COST OF EACH PROPOSED HIRE
+------------------------------------
+
+Both recommended hires are Fixed agents. At 7 days/week operation:
+
+  Fixed agent daily cost:   BDT 16,900 / 26 = BDT 650
+  Monthly cost (30 days):   BDT 650 × 30 = BDT 19,500
+  Annual cost (365 days):   BDT 650 × 365 = BDT 237,250
+
+For reference, a Variable agent at the planning workload (~32
+deliveries/day) costs more:
+
+  Variable daily cost:      BDT 300 + 14 × 32 = BDT 748
+  Monthly cost (30 days):   BDT 748 × 30 = BDT 22,440
+  Annual cost (365 days):   BDT 748 × 365 = BDT 273,020
+
+The breakeven is 25 deliveries/day (650 = 300 + 14 × 25). Every hub
+that needs agents operates above this threshold, so Fixed is the
+correct hire type.
+
+COST BY HUB
+-------------
+
+Hub        | Action                | New hires | Monthly cost | Annual cost
+-----------+-----------------------+-----------+--------------+------------
+Greenfield | Transfer 2            |         0 |        BDT 0 |      BDT 0
+Hillcrest  | Transfer 1 + Hire 1   |         1 |   BDT 19,500 | BDT 237,250
+Riverside  | Hire 1 (buffer)       |         1 |   BDT 19,500 | BDT 237,250
+Westwood   | No action             |         0 |        BDT 0 |      BDT 0
+Brookside  | No action             |         0 |        BDT 0 |      BDT 0
+Lakeview   | Transfer 3 out        |         0 |        BDT 0 |      BDT 0
+-----------+-----------------------+-----------+--------------+------------
+TOTAL      |                       |         2 |   BDT 39,000 | BDT 474,500
+
+Note: the 3 transferred agents' salaries are already in the company's
+payroll. Transfers move cost between hub P&Ls but add ZERO to total
+company expenditure.
+
+COST COMPARISON: RECOMMENDED PLAN VS ALTERNATIVES
+---------------------------------------------------
+
+Scenario                        | Hires | Monthly cost | Annual cost
+--------------------------------+-------+--------------+------------
+A. Approve all 8 (as requested) |     8 |  BDT 156,000 | BDT 1,898,000
+B. Hire only the gap (no xfers) |     5 |   BDT 97,500 | BDT 1,186,250
+C. Transfer 3 + hire 2 (PLAN)   |     2 |   BDT 39,000 |   BDT 474,500
+D. Transfer 4 + hire 1          |     1 |   BDT 19,500 |   BDT 237,250
+                                 |       |              |
+Savings: C vs A                  |    -6 | BDT 117,000  | BDT 1,423,500
+
+Scenario A is the most expensive and the most wasteful: 3 of the 8
+agents would go to hubs that already have surplus capacity. That is
+BDT 58,500/month spent on agents with nothing to do.
+
+Scenario B corrects the headcount but ignores the fact that surplus
+agents at Lakeview are already being paid. Hiring 5 when 3 can be
+transferred is BDT 58,500/month of unnecessary spending.
+
+Scenario D is the most aggressive: it transfers 1 agent from Brookside
+to Hillcrest in addition to the 3 from Lakeview, leaving Brookside
+with zero buffer. It saves BDT 19,500/month vs Scenario C, but removes
+the company's only reserve agent. Not recommended unless budget is
+critically constrained.
+
+COST OF THE ALTERNATIVE: FIXING RIVERSIDE'S DISPATCH
+------------------------------------------------------
+
+The cost of agent time wasted on avoidable re-attempts at Riverside:
+
+  Agent-side holds per week:          563 (Q3 Week 2)
+  Each hold generates 1 re-attempt the next day.
+  Cost per agent-attempt:             BDT 650 / 34 ≈ BDT 19.1
+  Weekly waste:                       563 × BDT 19.1 = BDT 10,753
+  Monthly waste:                      BDT 10,753 × 4.3 = BDT 46,238
+  Annual waste:                       ~BDT 554,860
+
+This means the company currently spends more on Riverside's avoidable
+re-attempts alone (BDT 46,238/month) than the entire recommended
+hiring plan (BDT 39,000/month). Fixing the dispatch problem is not
+just operationally sound — it is financially more impactful than
+hiring.
+
+
+===============================================================================
+4. OPERATIONAL CONSIDERATIONS
+===============================================================================
+
+INFLATED UTILISATION: WHERE "BUSY" DOES NOT MEAN "PRODUCTIVE"
+--------------------------------------------------------------
+
+Riverside's 90.8% Week 2 utilisation (Q2) appears to justify more
+agents. But utilisation measures attempts, not outcomes. When 18.4% of
+a hub's attempts are avoidable re-attempts from agent-side holds, the
+utilisation figure overstates productive workload.
+
+Decomposing Riverside's Week 2 utilisation:
+
+  Total W2 attempts:                  3,051
+  Agent-side holds (re-attempts):       563  (18.4% of attempts)
+  Productive attempts (first-time     2,488  (81.6% of attempts)
+    or customer-side retries):
+
+  Productive utilisation:             2,488 / (12 × 40 × 7)
+                                    = 2,488 / 3,360 = 74.0%
+
+  At 74% productive utilisation, Riverside is not overloaded — it is
+  spinning its wheels. The apparent gap of +1 agent disappears entirely
+  when unproductive work is removed.
+
+No other hub has this problem at scale. At the remaining hubs, agent-
+side holds are 19–26% of total holds (which themselves are much smaller
+than Riverside's), so the gap between headline utilisation and
+productive utilisation is negligible.
+
+HOW FIXING AGENT-SIDE HOLDS REDUCES WORKLOAD WITHOUT ADDING HEADCOUNT
+----------------------------------------------------------------------
+
+Each Late Dispatch hold at Riverside creates a chain:
+  Day 1: Order assigned → dispatched late → Hold recorded → re-attempt
+          scheduled for Day 2
+  Day 2: Same order re-assigned → another attempt (if dispatched on time,
+          delivered; if not, held again)
+
+Eliminating 1 Late Dispatch event saves:
+  - 1 wasted attempt on Day 2 (agent time freed for a new order)
+  - Reduced risk of a return if the customer gets frustrated by delays
+  - Improved delivery charge collection (held orders delay revenue)
+
+At 312 Late Dispatch events per week, fixing this one issue frees up
+312 agent-attempts per week — equivalent to adding 312 / (34 × 7) =
+1.3 agents of capacity. That is MORE than the +1 gap Riverside asked
+to fill by hiring.
+
+Similarly, "Not Attempted" (132/week) and "Agent Time Shortage"
+(119/week) suggest scheduling and routing problems, not headcount
+problems. An agent assigned an order they never attempt represents a
+double waste: the agent's time that day plus the re-attempt tomorrow.
+
+HUBS WITH UNUSED CAPACITY
+---------------------------
+
+Lakeview (56.2% utilisation, 3 surplus agents):
+  Lakeview's 3 surplus agents represent BDT 58,500/month in
+  underutilised payroll. Transferring them to Greenfield and Hillcrest
+  turns dead cost into productive capacity. Post-transfer, Lakeview
+  retains 8 agents — still sufficient for its peak requirement of 8.
+
+Brookside (71.5% utilisation, 1 surplus agent):
+  Brookside's surplus is smaller and should be held as a company-wide
+  reserve. If any hub experiences an unexpected volume spike or an agent
+  departure, Brookside can lend its spare agent temporarily.
+
+  Note: Brookside's effective surplus is partly offset by its 3 high-
+  return agents (Q5). If those agents' performance improves, Brookside's
+  real surplus is closer to 2.
+
+RISKS OF HIRING TOO EARLY VS TOO LATE
+---------------------------------------
+
+Hiring too early (approving 8 now):
+  - BDT 117,000/month in avoidable salary costs (vs hiring 2).
+  - Agents at surplus hubs (Lakeview, Brookside) sit idle, demoralised.
+  - Riverside's dispatch problem is ignored; it will worsen as volume
+    grows, leading to yet another hiring request next quarter.
+  - If the forecast is wrong (volume returns to Week 1 levels), the
+    company carries 8 unnecessary agents at BDT 156,000/month.
+
+Hiring too late (rejecting the request entirely):
+  - Greenfield and Hillcrest genuinely need more capacity NOW. At 88.6%
+    and 95.9% utilisation in Week 2, these hubs are already above target.
+    The forecast projects higher volumes.
+  - Understaffing leads to: agents exceeding the 40-attempt daily
+    standard → fatigue → more holds and returns → cascading demand on
+    subsequent days → customer dissatisfaction.
+  - Each unfilled position at Greenfield/Hillcrest means ~238
+    unhandled attempts per week (~222 delayed deliveries, BDT ~14,400
+    revenue at risk per position per week).
+
+The recommended plan (transfer 3 + hire 2) avoids both extremes: it
+fills every genuine gap immediately while keeping costs minimal and
+directing management attention to the root cause at Riverside.
+
+
+===============================================================================
+5. FINAL RECOMMENDATION
+===============================================================================
+
+DECISION: Approve 2 of the 8 requested hires. Fill the remaining
+3 positions through internal transfers.
+
+RECOMMENDED HIRES BY HUB
+--------------------------
+
+Hub        | Positions filled | How filled               | New hires
+-----------+------------------+--------------------------+----------
+Greenfield | 2                | 2 transfers from Lakeview|         0
+Hillcrest  | 2                | 1 transfer from Lakeview |         1
+           |                  | + 1 new Fixed hire       |
+Riverside  | 1                | 1 new Fixed hire (buffer)|         1
+Westwood   | 0                | —                        |         0
+Brookside  | 0                | —                        |         0
+Lakeview   | 0 (donates 3)   | —                        |         0
+-----------+------------------+--------------------------+----------
+TOTAL      | 5 positions      |                          |         2
+
+Post-plan staffing vs requirement:
+
+Hub        | Before | After | Required (peak) | Utilisation at peak
+-----------+--------+-------+-----------------+--------------------
+Greenfield |     10 |    12 |              12 | 82.6%
+Hillcrest  |      9 |    11 |              11 | 82.7%
+Riverside  |     12 |    13 |           13/11*| 83.5% / 66.4%*
+Westwood   |      9 |     9 |               9 | 81.9%
+Brookside  |     11 |    11 |              10 | 71.8%
+Lakeview   |     11 |     8 |               8 | 77.0%
+
+* 13 at current operations; 11 if dispatch is fixed.
+
+TOTAL ADDITIONAL HEADCOUNT: 2
+
+ESTIMATED COSTS
+----------------
+
+Monthly (salary only):
+  2 Fixed agents × BDT 19,500         = BDT 39,000
+
+Annual (salary only):
+  2 Fixed agents × BDT 237,250        = BDT 474,500
+
+For comparison, the original 8-agent request:
+  Monthly: BDT 156,000  |  Annual: BDT 1,898,000
+  Savings: BDT 117,000/month  |  BDT 1,423,500/year
+
+IMMEDIATE OPERATIONAL IMPROVEMENTS TO PRIORITISE
+--------------------------------------------------
+
+1. TRANSFER 3 AGENTS FROM LAKEVIEW (Week 1)
+   Move 3 Fixed agents to Greenfield (2) and Hillcrest (1). This can be
+   executed within the first week and immediately relieves the two most
+   capacity-constrained hubs. Cost: BDT 0.
+
+2. RIVERSIDE LATE DISPATCH PROGRAMME (Weeks 1–4)
+   Root-cause the 312 weekly Late Dispatch holds. Focus on:
+     - Dispatch scheduling cut-off times
+     - Warehouse-to-agent handoff process
+     - Route planning and order allocation
+   Target: reduce Late Dispatch from 312/week to <50/week.
+   Success metric: Riverside attempts-per-order drops below 1.15.
+   If successful, the buffer agent can be reassigned.
+
+3. BROOKSIDE HIGH-RETURN AGENTS (Weeks 2–4)
+   Investigate agents A1045, A1046, A1047 (Q5). Their 17–27% return
+   ratios are 3–5× the company norm. Determine whether the cause is
+   route-specific, customer-segment-specific, or agent-specific, and
+   act accordingly (route reassignment, coaching, or performance plan).
+
+ASSUMPTIONS AND LIMITATIONS
+-----------------------------
+
+1. One-time hiring costs (onboarding, training, equipment) are
+   referenced in the "costs" tab of cost_sheet.xlsx but this data is
+   not in the dataset. The costs above are salary only. One-time costs
+   would increase the total but also strengthen the case against
+   unnecessary hires.
+
+2. Transfers assume agents can be reassigned across hubs within the
+   same city. If cross-hub transfer is infeasible (contractual or
+   logistical barriers), the 3 transfer positions become 3 additional
+   hires, raising the total to 5 at BDT 97,500/month. Even in this
+   worst case, 5 is still fewer than the requested 8.
+
+3. The forecast is based on a trend from 2 weeks of data. If volumes
+   do not materialise, even 2 hires may be excessive. The plan
+   mitigates this by keeping the committed spend small (BDT 39,000/
+   month) and retaining flexibility.
+
+4. Planning capacity is 34 attempts per agent per day (85% of the
+   40-attempt standard), 7 days per week = 238 attempts per agent per
+   week. Required agents are rounded UP (CEIL) so no hub is planned
+   above target.
+
+5. All utilisation and gap calculations count only Active agents.
+   Inactive agents left at the end of Week 1 and are excluded from
+   Week 2 and forecast calculations.
+
+6. The average delivery charge is BDT 65 per order (from the orders
+   table), used where revenue impact is referenced. This is the
+   company's direct revenue; it does not include COD handling or other
+   indirect revenue.

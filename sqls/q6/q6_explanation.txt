@@ -1,0 +1,137 @@
+Q6. COST PER DELIVERED ORDER - EXPLANATION & STEP-BY-STEP GUIDE
+================================================================
+
+Question
+--------
+Calculate each hub's cost per delivered order for Week 1 and Week 2.
+
+
+PART A - HOW TO THINK ABOUT THE QUESTION (before writing any SQL)
+==================================================================
+
+Step A1 - Break the question into a formula
+  "cost per delivered order" = total cost / number of delivered orders
+  So for every hub and every week we need TWO numbers:
+    (1) total cost
+    (2) delivered orders
+  Then divide (1) by (2).
+
+Step A2 - Find what "cost" means (read the case notes in the PDF)
+  "A Fixed agent costs the monthly salary / 26 (BDT 650) for every day
+   they work. A Variable agent costs the daily allowance plus the
+   allowance per delivery for every day they work."
+  So cost = agent cost, and it is calculated PER AGENT PER DAY WORKED.
+
+Step A3 - Find which tables have the pieces
+  agents       -> which hub the agent belongs to, and salary_type
+  agent_salary -> the money values for each salary_type
+                    Fixed    : monthly_salary 16900, others 0
+                    Variable : daily_allowance 300, allowance_per_delivery 14
+  order_logs   -> which days each agent worked, and how many deliveries
+  hubs         -> hub names
+
+Step A4 - Notice the smallest "unit" of the calculation
+  A Variable agent's cost depends on deliveries THAT DAY.
+  So we cannot start at hub level. We must start with:
+    one row per agent per day worked
+  and then add those rows up to hub + week.
+  This is the key idea: build small rows first, then SUM them up.
+
+Step A5 - Write one formula that works for both salary types
+  daily_cost = monthly_salary / 26 + daily_allowance
+               + allowance_per_delivery x deliveries
+  Fixed    : 16900/26 + 0   + 0  x deliveries = 650
+  Variable : 0        + 300 + 14 x deliveries
+  Because the unused columns are 0, we do not need a CASE WHEN.
+  And because the numbers come from the table (not typed in), the query
+  still works if salaries change.
+
+
+PART B - ASSUMPTIONS
+====================
+1. A "day worked" = a day on which the agent has at least one event in
+   order_logs. (854 agent-days in total; every one of them has at least
+   one delivery.)
+2. Cost = agent salary cost only. The brief mentions a "costs" tab in the
+   cost sheet, but that file is not in our dataset, so other costs
+   (if any) are not included.
+3. Delivered orders = 'Delivered' events in order_logs, credited to the
+   hub of the agent who delivered them. (All 21,078 deliveries counted.)
+4. monthly_salary / 26.0 uses 26.0 (not 26) so PostgreSQL does decimal
+   division. 16900 / 26 happens to be exactly 650, but writing 26.0 is
+   the safe habit.
+5. Week 1 = 13-19 Oct 2026, Week 2 = 20-26 Oct 2026.
+
+
+PART C - HOW THE QUERY WORKS (step by step)
+===========================================
+
+Step 1 - agent_days  (one row per agent per day worked)
+  Joins agents -> order_logs.
+  GROUP BY agent_id, hub_id, salary_type, DATE(event_time)
+  COUNT(*) FILTER (WHERE status = 'Delivered') -> deliveries that day
+  Example row:  A1001 | H01 | Variable | 2026-10-13 | 25
+
+Step 2 - agent_day_cost  (add the money)
+  Joins agent_days -> agent_salary ON salary_type.
+  Applies the formula from Step A5 -> daily_cost.
+  Example: Variable agent with 25 deliveries -> 300 + 14 x 25 = 650
+           Fixed agent (any deliveries)      -> 650
+
+Step 3 - hub_weekly  (add it all up per hub)
+  GROUP BY hub_id
+  SUM(daily_cost) FILTER (WHERE work_date in Week 1) -> week1_cost
+  SUM(deliveries) FILTER (WHERE work_date in Week 1) -> week1_deliveries
+  ... same two lines again for Week 2.
+  This is the same FILTER trick used in Q1-Q3, but with SUM instead of
+  COUNT, so Week 1 and Week 2 end up side by side in one row.
+
+Step 4 - final SELECT  (divide)
+  week1_cost / week1_deliveries -> week1_cost_per_delivery
+  week2_cost / week2_deliveries -> week2_cost_per_delivery
+  Joins hubs for names. Sorted by Week 2 cost per delivery (most
+  expensive first).
+
+
+PART D - CHECK IT BY HAND (always verify one number yourself)
+=============================================================
+Greenfield, Week 1:
+  Fixed agent-days    = 48  -> 48 x 650           = 31,200
+  Variable agent-days = 27  -> 27 x 300           =  8,100
+  Variable deliveries = 597 -> 597 x 14           =  8,358
+                                     total cost   = 47,658  (matches query)
+  Total deliveries    = 1,101 (Fixed) + 597 (Variable) = 1,698
+  Cost per delivery   = 47,658 / 1,698 = BDT 28.07  (matches query)
+
+Also checked: Week 1 + Week 2 deliveries across all hubs
+  = 9,670 + 11,408 = 21,078 = every 'Delivered' row in order_logs.
+
+
+PART E - RESULT
+===============
+Hub        | W1 cost | W1 deliv | W1 cost/deliv | W2 cost | W2 deliv | W2 cost/deliv
+-----------+---------+----------+---------------+---------+----------+--------------
+Lakeview   |  46,728 |    1,469 |         31.81 |  47,588 |    1,532 |         31.06
+Riverside  |  51,038 |    1,498 |         34.07 |  53,482 |    1,981 |         27.00
+Brookside  |  46,086 |    1,631 |         28.26 |  47,896 |    1,780 |         26.91
+Westwood   |  43,592 |    1,687 |         25.84 |  39,512 |    1,794 |         22.02
+Hillcrest  |  41,896 |    1,687 |         24.83 |  46,076 |    2,111 |         21.83
+Greenfield |  47,658 |    1,698 |         28.07 |  47,944 |    2,210 |         21.69
+(costs in BDT)
+
+
+PART F - KEY FINDINGS
+=====================
+- Cost per delivery FELL in every hub from Week 1 to Week 2. Most agents
+  are Fixed (paid the same per day), so when volume rises the same cost
+  is spread over more deliveries.
+- Lakeview is the most expensive hub in Week 2 (BDT 31.06): it has the
+  fewest deliveries and was only 56% utilised in Q2 -> spare capacity.
+- Riverside had the most expensive Week 1 (BDT 34.07) and still has the
+  2nd highest Week 2 cost, despite being busy - its many holds (Q3) mean
+  agents spend paid time on attempts that do not become deliveries.
+- Greenfield, Hillcrest and Westwood are the cheapest (~BDT 22). These
+  are also the busiest hubs from Q2, so they are already using their
+  agents efficiently.
+- Westwood's Week 2 cost dropped by about BDT 4,000 partly because its
+  inactive agent left after Week 1 (fewer Fixed agent-days).
