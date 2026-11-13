@@ -1,4 +1,4 @@
-# Logistics Analysis
+# Logistics KPI Analysis & Performance Optimization
 
 This repository contains a CTE-based PostgreSQL operational and ROI analysis of a parcel delivery network. It combines agent, hub, order, order-event, salary, and forecast data to evaluate current performance and make staffing, budget, and return-on-investment recommendations.
 
